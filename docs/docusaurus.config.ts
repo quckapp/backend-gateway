@@ -3,15 +3,15 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'QuckChat Documentation',
+  title: 'QuckApp Documentation',
   tagline: 'Real-time messaging platform with audio/video calling',
   favicon: 'img/favicon.ico',
 
-  url: 'https://quckchat.com',
+  url: 'https://quckapp.com',
   baseUrl: '/',
 
-  organizationName: 'quckchat',
-  projectName: 'quckchat-docs',
+  organizationName: 'quckapp',
+  projectName: 'quckapp-docs',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -27,7 +27,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/quckchat/backend/tree/main/docs/',
+          editUrl: 'https://github.com/quckapp/backend/tree/main/docs/',
         },
         blog: false,
         theme: {
@@ -38,11 +38,11 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/quckchat-social-card.jpg',
+    image: 'img/quckapp-social-card.jpg',
     navbar: {
-      title: 'QuckChat',
+      title: 'QuckApp',
       logo: {
-        alt: 'QuckChat Logo',
+        alt: 'QuckApp Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -58,7 +58,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/quckchat/backend',
+          href: 'https://github.com/quckapp/backend',
           label: 'GitHub',
           position: 'right',
         },
@@ -84,7 +84,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} QuckChat. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} QuckApp. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

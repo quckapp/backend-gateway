@@ -1,12 +1,12 @@
 ---
 sidebar_position: 2
 title: Microservices Architecture
-description: Detailed breakdown of QuckChat microservices
+description: Detailed breakdown of QuckApp microservices
 ---
 
 # Microservices Architecture
 
-QuckChat uses 9 independent microservices, each responsible for a specific domain.
+QuckApp uses 9 independent microservices, each responsible for a specific domain.
 
 ## Service Overview
 

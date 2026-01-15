@@ -1,6 +1,6 @@
 /**
  * PM2 Ecosystem Configuration
- * Production process manager for QuckChat Backend
+ * Production process manager for QuckApp Backend
  *
  * Usage:
  *   pm2 start ecosystem.config.js
@@ -9,7 +9,7 @@
  *
  * Commands:
  *   pm2 list                    - List all processes
- *   pm2 logs quckchat-backend   - View logs
+ *   pm2 logs quckapp-backend   - View logs
  *   pm2 monit                   - Monitor processes
  *   pm2 reload ecosystem.config.js - Zero-downtime reload
  *   pm2 stop all               - Stop all processes
@@ -20,7 +20,7 @@ module.exports = {
   apps: [
     {
       // Application name
-      name: 'quckchat-backend',
+      name: 'quckapp-backend',
 
       // Entry point
       script: 'dist/main.js',
@@ -98,7 +98,7 @@ module.exports = {
 
     // Worker process for background jobs (optional)
     {
-      name: 'quckchat-worker',
+      name: 'quckapp-worker',
       script: 'dist/worker.js',
       cwd: './',
       instances: 1,
@@ -134,10 +134,10 @@ module.exports = {
       ref: 'origin/main',
 
       // Git repository
-      repo: 'git@github.com:your-username/quckchat-backend.git',
+      repo: 'git@github.com:your-username/quckapp-backend.git',
 
       // Path on server
-      path: '/var/www/quckchat-backend',
+      path: '/var/www/quckapp-backend',
 
       // Pre-deploy commands (run on local machine)
       'pre-deploy-local': '',
@@ -161,8 +161,8 @@ module.exports = {
       user: 'deploy',
       host: ['staging.your-server.com'],
       ref: 'origin/develop',
-      repo: 'git@github.com:your-username/quckchat-backend.git',
-      path: '/var/www/quckchat-backend-staging',
+      repo: 'git@github.com:your-username/quckapp-backend.git',
+      path: '/var/www/quckapp-backend-staging',
       'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env staging',
       env: {
         NODE_ENV: 'staging',

@@ -6,7 +6,7 @@ description: MongoDB schema design and data modeling
 
 # Database Architecture
 
-QuckChat uses MongoDB as the primary database with Mongoose ODM for schema definition and data access.
+QuckApp uses MongoDB as the primary database with Mongoose ODM for schema definition and data access.
 
 ## Database Design
 

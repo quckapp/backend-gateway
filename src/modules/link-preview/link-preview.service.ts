@@ -82,7 +82,7 @@ export class LinkPreviewService {
       const protocol = url.startsWith('https') ? https : http;
       const options = {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; QuckChatBot/1.0; +https://quckchat.app)',
+          'User-Agent': 'Mozilla/5.0 (compatible; QuckAppBot/1.0; +https://quckapp.app)',
           Accept: 'text/html,application/xhtml+xml',
           'Accept-Language': 'en-US,en;q=0.9',
         },

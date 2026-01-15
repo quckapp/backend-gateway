@@ -314,7 +314,7 @@ function generateMessage(conversation: any, users: any[]): any {
 async function seed() {
   const config = parseArgs();
   const mongoUri =
-    process.env.MONGODB_URI_DEV || process.env.MONGODB_URI || 'mongodb://localhost:27017/quckchat';
+    process.env.MONGODB_URI_DEV || process.env.MONGODB_URI || 'mongodb://localhost:27017/quckapp';
 
   console.log('\n🌱 Starting database seed...\n');
   console.log(`Configuration:`);

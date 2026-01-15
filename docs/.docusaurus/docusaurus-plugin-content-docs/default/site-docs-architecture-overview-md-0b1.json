@@ -1,21 +1,21 @@
 {
   "id": "architecture/overview",
   "title": "Architecture Overview",
-  "description": "High-level architecture of QuckChat backend",
+  "description": "High-level architecture of QuckApp backend",
   "source": "@site/docs/architecture/overview.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/overview",
   "permalink": "/docs/architecture/overview",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/architecture/overview.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/architecture/overview.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1,
     "title": "Architecture Overview",
-    "description": "High-level architecture of QuckChat backend"
+    "description": "High-level architecture of QuckApp backend"
   },
   "sidebar": "docsSidebar",
   "previous": {

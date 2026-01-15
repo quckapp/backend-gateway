@@ -1,14 +1,14 @@
 {
   "id": "index",
   "title": "Introduction",
-  "description": "Welcome to QuckChat documentation",
+  "description": "Welcome to QuckApp documentation",
   "source": "@site/docs/index.md",
   "sourceDirName": ".",
   "slug": "/",
   "permalink": "/docs/",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/index.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/index.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 0,
@@ -16,6 +16,6 @@
     "slug": "/",
     "sidebar_position": 0,
     "title": "Introduction",
-    "description": "Welcome to QuckChat documentation"
+    "description": "Welcome to QuckApp documentation"
   }
 }

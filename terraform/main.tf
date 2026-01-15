@@ -1,8 +1,8 @@
 # =============================================================================
-# QuckChat Infrastructure - Main Terraform Configuration
+# QuckApp Infrastructure - Main Terraform Configuration
 # =============================================================================
 # This Terraform configuration provisions the cloud infrastructure for the
-# QuckChat application. It supports multiple cloud providers (AWS, GCP, Azure)
+# QuckApp application. It supports multiple cloud providers (AWS, GCP, Azure)
 # through modular design.
 #
 # Usage:
@@ -28,11 +28,11 @@ terraform {
   # Backend configuration for state management
   # Uncomment and configure for production use
   # backend "s3" {
-  #   bucket         = "quckchat-terraform-state"
+  #   bucket         = "quckapp-terraform-state"
   #   key            = "infrastructure/terraform.tfstate"
   #   region         = "us-east-1"
   #   encrypt        = true
-  #   dynamodb_table = "quckchat-terraform-locks"
+  #   dynamodb_table = "quckapp-terraform-locks"
   # }
 }
 
@@ -45,7 +45,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "QuckChat"
+      Project     = "QuckApp"
       Environment = var.environment
       ManagedBy   = "Terraform"
       Team        = var.team_name

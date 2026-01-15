@@ -1,7 +1,7 @@
 {
-  "name": "quckchat-backend",
+  "name": "quckapp-backend",
   "version": "1.0.0",
-  "description": "QuckChat Backend - Real-time chat with audio/video calling",
+  "description": "QuckApp Backend - Real-time chat with audio/video calling",
   "author": "",
   "private": true,
   "license": "MIT",

@@ -6,7 +6,7 @@ description: Docker and Docker Compose deployment guide
 
 # Docker Deployment
 
-Deploy QuckChat using Docker containers for consistent, reproducible deployments.
+Deploy QuckApp using Docker containers for consistent, reproducible deployments.
 
 ## Quick Start
 
@@ -46,7 +46,7 @@ services:
   # Infrastructure
   mongodb:
     image: mongo:6
-    container_name: quckchat-mongodb
+    container_name: quckapp-mongodb
     ports:
       - "27017:27017"
     volumes:
@@ -62,7 +62,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: quckchat-redis
+    container_name: quckapp-redis
     ports:
       - "6379:6379"
     volumes:
@@ -79,13 +79,13 @@ services:
       context: .
       dockerfile: Dockerfile
       target: gateway
-    container_name: quckchat-gateway
+    container_name: quckapp-gateway
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: production
       PORT: 3000
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
       REDIS_HOST: redis
       REDIS_PORT: 6379
     depends_on:
@@ -104,10 +104,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: auth-service
-    container_name: quckchat-auth
+    container_name: quckapp-auth
     environment:
       SERVICE_PORT: 4001
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -117,10 +117,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: users-service
-    container_name: quckchat-users
+    container_name: quckapp-users
     environment:
       SERVICE_PORT: 4002
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -130,10 +130,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: messages-service
-    container_name: quckchat-messages
+    container_name: quckapp-messages
     environment:
       SERVICE_PORT: 4003
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -143,10 +143,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: conversations-service
-    container_name: quckchat-conversations
+    container_name: quckapp-conversations
     environment:
       SERVICE_PORT: 4004
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -156,10 +156,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: notifications-service
-    container_name: quckchat-notifications
+    container_name: quckapp-notifications
     environment:
       SERVICE_PORT: 4005
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -169,10 +169,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: media-service
-    container_name: quckchat-media
+    container_name: quckapp-media
     environment:
       SERVICE_PORT: 4006
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -182,10 +182,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: calls-service
-    container_name: quckchat-calls
+    container_name: quckapp-calls
     environment:
       SERVICE_PORT: 4007
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -195,10 +195,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: analytics-service
-    container_name: quckchat-analytics
+    container_name: quckapp-analytics
     environment:
       SERVICE_PORT: 4008
-      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckchat?authSource=admin
+      MONGODB_URI_PROD: mongodb://root:password@mongodb:27017/quckapp?authSource=admin
     depends_on:
       mongodb:
         condition: service_healthy
@@ -209,7 +209,7 @@ volumes:
 
 networks:
   default:
-    name: quckchat-network
+    name: quckapp-network
 ```
 
 ## Dockerfile
@@ -475,7 +475,7 @@ services:
 ### Container won't start
 ```bash
 # Check logs
-docker logs quckchat-gateway
+docker logs quckapp-gateway
 
 # Check status
 docker ps -a
@@ -484,10 +484,10 @@ docker ps -a
 ### Database connection issues
 ```bash
 # Verify MongoDB is running
-docker exec quckchat-mongodb mongosh --eval "db.adminCommand('ping')"
+docker exec quckapp-mongodb mongosh --eval "db.adminCommand('ping')"
 
 # Check network
-docker network inspect quckchat-network
+docker network inspect quckapp-network
 ```
 
 ### Out of memory

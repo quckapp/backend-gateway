@@ -6,7 +6,7 @@ description: Consul and HashiCorp Vault configuration
 
 # Service Discovery & Secrets Management
 
-QuckChat uses Consul for service discovery and health checks, and HashiCorp Vault for secrets management.
+QuckApp uses Consul for service discovery and health checks, and HashiCorp Vault for secrets management.
 
 ## Consul - Service Discovery
 
@@ -15,7 +15,7 @@ QuckChat uses Consul for service discovery and health checks, and HashiCorp Vaul
 ```env
 CONSUL_HOST=localhost
 CONSUL_PORT=8500
-CONSUL_SERVICE_NAME=quckchat-backend
+CONSUL_SERVICE_NAME=quckapp-backend
 CONSUL_SERVICE_PORT=3000
 CONSUL_HEALTH_CHECK_INTERVAL=10s
 ```
@@ -32,8 +32,8 @@ const consul = new Consul({
 
 // Register service
 await consul.agent.service.register({
-  name: 'quckchat-backend',
-  id: 'quckchat-backend-1',
+  name: 'quckapp-backend',
+  id: 'quckapp-backend-1',
   address: '192.168.1.10',
   port: 3000,
   check: {
@@ -48,7 +48,7 @@ await consul.agent.service.register({
 ```typescript
 // Get healthy instances of a service
 const services = await consul.health.service({
-  service: 'quckchat-auth',
+  service: 'quckapp-auth',
   passing: true
 });
 
@@ -81,7 +81,7 @@ const { Value } = await consul.kv.get('config/database/host');
 ```env
 VAULT_ADDR=http://localhost:8200
 VAULT_TOKEN=your-vault-token
-VAULT_NAMESPACE=quckchat
+VAULT_NAMESPACE=quckapp
 ```
 
 ### Features
@@ -143,12 +143,12 @@ await client.revoke({ lease_id });
 
 ```typescript
 // Encrypt data
-const { data: encrypted } = await client.write('transit/encrypt/quckchat', {
+const { data: encrypted } = await client.write('transit/encrypt/quckapp', {
   plaintext: Buffer.from('sensitive data').toString('base64')
 });
 
 // Decrypt data
-const { data: decrypted } = await client.write('transit/decrypt/quckchat', {
+const { data: decrypted } = await client.write('transit/decrypt/quckapp', {
   ciphertext: encrypted.ciphertext
 });
 ```

@@ -6,7 +6,7 @@ description: Kafka, RabbitMQ, and BullMQ configuration
 
 # Message Brokers
 
-QuckChat uses multiple message brokers for different use cases: Kafka for event streaming, RabbitMQ for reliable queuing, and BullMQ for job processing.
+QuckApp uses multiple message brokers for different use cases: Kafka for event streaming, RabbitMQ for reliable queuing, and BullMQ for job processing.
 
 ## Architecture
 
@@ -35,8 +35,8 @@ QuckChat uses multiple message brokers for different use cases: Kafka for event 
 
 ```env
 KAFKA_BROKERS=localhost:9092
-KAFKA_CLIENT_ID=quckchat-backend
-KAFKA_GROUP_ID=quckchat-consumers
+KAFKA_CLIENT_ID=quckapp-backend
+KAFKA_GROUP_ID=quckapp-consumers
 KAFKA_SASL_MECHANISM=plain
 KAFKA_SASL_USERNAME=
 KAFKA_SASL_PASSWORD=
@@ -63,7 +63,7 @@ KAFKA_SASL_PASSWORD=
 import { Kafka } from 'kafkajs';
 
 const kafka = new Kafka({
-  clientId: 'quckchat-backend',
+  clientId: 'quckapp-backend',
   brokers: ['localhost:9092']
 });
 
@@ -98,8 +98,8 @@ await consumer.run({
 
 ```env
 RABBITMQ_URL=amqp://guest:guest@localhost:5672
-RABBITMQ_QUEUE_PREFIX=quckchat
-RABBITMQ_EXCHANGE=quckchat.events
+RABBITMQ_QUEUE_PREFIX=quckapp
+RABBITMQ_EXCHANGE=quckapp.events
 ```
 
 ### Queues

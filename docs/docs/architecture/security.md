@@ -6,7 +6,7 @@ description: Security measures and authentication flow
 
 # Security Architecture
 
-QuckChat implements multiple layers of security to protect user data and ensure secure communication.
+QuckApp implements multiple layers of security to protect user data and ensure secure communication.
 
 ## Security Layers
 

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: OpenAPI Specification
-description: OpenAPI/Swagger specification for QuckChat API
+description: OpenAPI/Swagger specification for QuckApp API
 ---
 
 # OpenAPI Specification
 
-QuckChat provides a complete OpenAPI 3.0 specification for all REST API endpoints.
+QuckApp provides a complete OpenAPI 3.0 specification for all REST API endpoints.
 
 ## Live Documentation
 
@@ -25,7 +25,7 @@ Features:
 ## Download Specification
 
 ### YAML Format
-[Download OpenAPI YAML](/openapi/quckchat-api.yaml)
+[Download OpenAPI YAML](/openapi/quckapp-api.yaml)
 
 ### Using the Specification
 
@@ -43,19 +43,19 @@ npm install @openapitools/openapi-generator-cli -g
 
 # Generate TypeScript client
 openapi-generator-cli generate \
-  -i quckchat-api.yaml \
+  -i quckapp-api.yaml \
   -g typescript-axios \
   -o ./generated/typescript-client
 
 # Generate Python client
 openapi-generator-cli generate \
-  -i quckchat-api.yaml \
+  -i quckapp-api.yaml \
   -g python \
   -o ./generated/python-client
 
 # Generate Dart client (for Flutter)
 openapi-generator-cli generate \
-  -i quckchat-api.yaml \
+  -i quckapp-api.yaml \
   -g dart \
   -o ./generated/dart-client
 ```
@@ -67,7 +67,7 @@ openapi-generator-cli generate \
 | Environment | Base URL |
 |-------------|----------|
 | Development | `http://localhost:3000/api/v1` |
-| Production | `https://api.quckchat.com/api/v1` |
+| Production | `https://api.quckapp.com/api/v1` |
 
 ### Authentication
 

@@ -1,21 +1,21 @@
 {
   "id": "deployment/railway",
   "title": "Railway Deployment",
-  "description": "Deploy QuckChat to Railway",
+  "description": "Deploy QuckApp to Railway",
   "source": "@site/docs/deployment/railway.md",
   "sourceDirName": "deployment",
   "slug": "/deployment/railway",
   "permalink": "/docs/deployment/railway",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/deployment/railway.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/deployment/railway.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 3,
   "frontMatter": {
     "sidebar_position": 3,
     "title": "Railway Deployment",
-    "description": "Deploy QuckChat to Railway"
+    "description": "Deploy QuckApp to Railway"
   },
   "sidebar": "docsSidebar",
   "previous": {

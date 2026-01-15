@@ -6,7 +6,7 @@ description: Java/Spring Boot authentication microservice
 
 # Auth Service (Spring Boot)
 
-QuckChat uses a dedicated **Spring Boot authentication microservice** for enterprise-grade security, separate from the main NestJS backend.
+QuckApp uses a dedicated **Spring Boot authentication microservice** for enterprise-grade security, separate from the main NestJS backend.
 
 ## Overview
 
@@ -168,7 +168,7 @@ QuckChat uses a dedicated **Spring Boot authentication microservice** for enterp
   "email": "user@example.com",
   "externalId": "nestjs-user-id",
   "twoFactorEnabled": true,
-  "iss": "quckchat-auth",
+  "iss": "quckapp-auth",
   "exp": 1704067200
 }
 ```
@@ -297,7 +297,7 @@ jwt:
   secret: ${JWT_SECRET}  # 256-bit minimum
   access-token-expiration: 900000   # 15 minutes
   refresh-token-expiration: 604800000  # 7 days
-  issuer: quckchat-auth
+  issuer: quckapp-auth
 
 security:
   rate-limit:
@@ -332,7 +332,7 @@ oauth2:
 # Database
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=quckchat_auth
+DB_NAME=quckapp_auth
 DB_USERNAME=postgres
 DB_PASSWORD=password
 
@@ -396,7 +396,7 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: quckchat_auth
+      POSTGRES_DB: quckapp_auth
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:

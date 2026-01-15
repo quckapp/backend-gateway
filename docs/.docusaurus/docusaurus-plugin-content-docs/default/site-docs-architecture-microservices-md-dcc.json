@@ -1,21 +1,21 @@
 {
   "id": "architecture/microservices",
   "title": "Microservices Architecture",
-  "description": "Detailed breakdown of QuckChat microservices",
+  "description": "Detailed breakdown of QuckApp microservices",
   "source": "@site/docs/architecture/microservices.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/microservices",
   "permalink": "/docs/architecture/microservices",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/architecture/microservices.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/architecture/microservices.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 2,
   "frontMatter": {
     "sidebar_position": 2,
     "title": "Microservices Architecture",
-    "description": "Detailed breakdown of QuckChat microservices"
+    "description": "Detailed breakdown of QuckApp microservices"
   },
   "sidebar": "docsSidebar",
   "previous": {

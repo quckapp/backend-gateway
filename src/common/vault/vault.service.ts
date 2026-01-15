@@ -27,23 +27,23 @@ export const VAULT_ENGINES = {
  */
 export const VAULT_PATHS = {
   // Application secrets
-  APP_SECRETS: 'secret/data/quckchat',
-  DATABASE: 'secret/data/quckchat/database',
-  JWT: 'secret/data/quckchat/jwt',
-  ENCRYPTION: 'secret/data/quckchat/encryption',
+  APP_SECRETS: 'secret/data/quckapp',
+  DATABASE: 'secret/data/quckapp/database',
+  JWT: 'secret/data/quckapp/jwt',
+  ENCRYPTION: 'secret/data/quckapp/encryption',
 
   // Third-party API keys
-  FIREBASE: 'secret/data/quckchat/firebase',
-  OPENAI: 'secret/data/quckchat/openai',
-  SMTP: 'secret/data/quckchat/smtp',
+  FIREBASE: 'secret/data/quckapp/firebase',
+  OPENAI: 'secret/data/quckapp/openai',
+  SMTP: 'secret/data/quckapp/smtp',
 
   // Infrastructure secrets
-  REDIS: 'secret/data/quckchat/redis',
-  KAFKA: 'secret/data/quckchat/kafka',
-  RABBITMQ: 'secret/data/quckchat/rabbitmq',
+  REDIS: 'secret/data/quckapp/redis',
+  KAFKA: 'secret/data/quckapp/kafka',
+  RABBITMQ: 'secret/data/quckapp/rabbitmq',
 
   // Dynamic database credentials
-  DB_CREDS: 'database/creds/quckchat-role',
+  DB_CREDS: 'database/creds/quckapp-role',
 } as const;
 
 export type VaultPath = (typeof VAULT_PATHS)[keyof typeof VAULT_PATHS];
@@ -348,7 +348,7 @@ export class VaultService implements OnModuleInit, OnModuleDestroy {
   /**
    * Get dynamic database credentials
    */
-  async getDatabaseCredentials(role: string = 'quckchat-role'): Promise<{
+  async getDatabaseCredentials(role: string = 'quckapp-role'): Promise<{
     username: string;
     password: string;
     leaseId: string;

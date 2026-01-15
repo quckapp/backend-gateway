@@ -1,21 +1,21 @@
 {
   "id": "features/index",
   "title": "Features Overview",
-  "description": "Overview of all QuckChat features",
+  "description": "Overview of all QuckApp features",
   "source": "@site/docs/features/index.md",
   "sourceDirName": "features",
   "slug": "/features/",
   "permalink": "/docs/features/",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/features/index.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/features/index.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1,
     "title": "Features Overview",
-    "description": "Overview of all QuckChat features"
+    "description": "Overview of all QuckApp features"
   },
   "sidebar": "docsSidebar",
   "previous": {

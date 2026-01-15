@@ -1,5 +1,5 @@
 # =============================================================================
-# QuckChat Infrastructure - Free Tier Configuration
+# QuckApp Infrastructure - Free Tier Configuration
 # =============================================================================
 # This configuration is optimized for development/testing with minimal cost:
 # - EC2 t2.micro (free tier eligible)
@@ -39,7 +39,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "QuckChat"
+      Project     = "QuckApp"
       Environment = var.environment
       ManagedBy   = "Terraform"
       CostCenter  = "FreeTier"
@@ -132,7 +132,7 @@ resource "aws_route_table_association" "public" {
 
 resource "aws_security_group" "ec2" {
   name        = "${local.name_prefix}-ec2-sg"
-  description = "Security group for QuckChat EC2 instance"
+  description = "Security group for QuckApp EC2 instance"
   vpc_id      = aws_vpc.main.id
 
   # SSH
@@ -277,7 +277,7 @@ module "s3" {
 
 variable "project_name" {
   type    = string
-  default = "quckchat"
+  default = "quckapp"
 }
 
 variable "environment" {
@@ -392,7 +392,7 @@ output "deploy_instructions" {
        # On EC2 instance:
        aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${module.ecr.repository_url}
        docker pull ${module.ecr.repository_url}:latest
-       docker run -d --name quckchat -p 3000:3000 --env-file /opt/quckchat/.env ${module.ecr.repository_url}:latest
+       docker run -d --name quckapp -p 3000:3000 --env-file /opt/quckapp/.env ${module.ecr.repository_url}:latest
 
     4. Access your API:
        ${module.ec2.api_url}

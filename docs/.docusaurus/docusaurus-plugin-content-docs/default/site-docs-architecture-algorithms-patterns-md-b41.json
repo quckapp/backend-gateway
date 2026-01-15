@@ -1,21 +1,21 @@
 {
   "id": "architecture/algorithms-patterns",
   "title": "Algorithms & Patterns",
-  "description": "Algorithms, data structures, and design patterns used in QuckChat",
+  "description": "Algorithms, data structures, and design patterns used in QuckApp",
   "source": "@site/docs/architecture/algorithms-patterns.md",
   "sourceDirName": "architecture",
   "slug": "/architecture/algorithms-patterns",
   "permalink": "/docs/architecture/algorithms-patterns",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/architecture/algorithms-patterns.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/architecture/algorithms-patterns.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 7,
   "frontMatter": {
     "sidebar_position": 7,
     "title": "Algorithms & Patterns",
-    "description": "Algorithms, data structures, and design patterns used in QuckChat"
+    "description": "Algorithms, data structures, and design patterns used in QuckApp"
   },
   "sidebar": "docsSidebar",
   "previous": {

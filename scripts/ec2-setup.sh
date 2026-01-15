@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# QuckChat EC2 Setup Script
+# QuckApp EC2 Setup Script
 # =============================================================================
 # Run this script on your EC2 instance to set up Docker and the environment
 # Usage: curl -sSL https://raw.githubusercontent.com/YOUR_REPO/main/scripts/ec2-setup.sh | bash
@@ -10,7 +10,7 @@
 set -e
 
 echo "=========================================="
-echo "QuckChat EC2 Setup Script"
+echo "QuckApp EC2 Setup Script"
 echo "=========================================="
 
 # Check if running as root or with sudo
@@ -49,14 +49,14 @@ $SUDO systemctl enable redis6 || true
 
 # Create application directory
 echo "[5/7] Creating application directory..."
-$SUDO mkdir -p /opt/quckchat
-$SUDO chown ec2-user:ec2-user /opt/quckchat
+$SUDO mkdir -p /opt/quckapp
+$SUDO chown ec2-user:ec2-user /opt/quckapp
 
 # Create environment file template
 echo "[6/7] Creating environment file template..."
-cat > /opt/quckchat/.env.template << 'EOF'
+cat > /opt/quckapp/.env.template << 'EOF'
 # =============================================================================
-# QuckChat Backend Environment Variables
+# QuckApp Backend Environment Variables
 # =============================================================================
 # Copy this file to .env and fill in the values
 # cp .env.template .env && nano .env
@@ -84,7 +84,7 @@ ENCRYPTION_KEY=your-32-character-encryption-key
 
 # AWS S3 (for file uploads)
 AWS_REGION=ap-southeast-1
-AWS_S3_BUCKET=quckchat-uploads
+AWS_S3_BUCKET=quckapp-uploads
 
 # Firebase (for push notifications) - Optional
 # FIREBASE_PROJECT_ID=
@@ -94,20 +94,20 @@ EOF
 
 # Create deployment script
 echo "[7/7] Creating deployment script..."
-cat > /opt/quckchat/deploy.sh << 'EOF'
+cat > /opt/quckapp/deploy.sh << 'EOF'
 #!/bin/bash
 # =============================================================================
-# QuckChat Deployment Script
+# QuckApp Deployment Script
 # =============================================================================
 set -e
 
 AWS_REGION="ap-southeast-1"
-ECR_REPO="250560143886.dkr.ecr.ap-southeast-1.amazonaws.com/quckchat-backend"
-CONTAINER_NAME="quckchat-backend"
+ECR_REPO="250560143886.dkr.ecr.ap-southeast-1.amazonaws.com/quckapp-backend"
+CONTAINER_NAME="quckapp-backend"
 CONTAINER_PORT=3000
 
 echo "=========================================="
-echo "Deploying QuckChat Backend"
+echo "Deploying QuckApp Backend"
 echo "=========================================="
 
 # Login to ECR
@@ -129,7 +129,7 @@ docker run -d \
   --name $CONTAINER_NAME \
   --restart unless-stopped \
   -p $CONTAINER_PORT:$CONTAINER_PORT \
-  --env-file /opt/quckchat/.env \
+  --env-file /opt/quckapp/.env \
   --add-host=host.docker.internal:host-gateway \
   $ECR_REPO:latest
 
@@ -158,7 +158,7 @@ else
 fi
 EOF
 
-chmod +x /opt/quckchat/deploy.sh
+chmod +x /opt/quckapp/deploy.sh
 
 echo ""
 echo "=========================================="
@@ -168,14 +168,14 @@ echo ""
 echo "Next steps:"
 echo ""
 echo "1. Create your .env file:"
-echo "   cp /opt/quckchat/.env.template /opt/quckchat/.env"
-echo "   nano /opt/quckchat/.env"
+echo "   cp /opt/quckapp/.env.template /opt/quckapp/.env"
+echo "   nano /opt/quckapp/.env"
 echo ""
 echo "2. Configure AWS credentials (for ECR access):"
 echo "   aws configure"
 echo ""
 echo "3. Deploy the application:"
-echo "   /opt/quckchat/deploy.sh"
+echo "   /opt/quckapp/deploy.sh"
 echo ""
 echo "4. Or wait for GitHub Actions to deploy automatically"
 echo ""

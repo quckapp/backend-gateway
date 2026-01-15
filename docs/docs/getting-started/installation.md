@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Installation
-description: Complete installation guide for QuckChat backend
+description: Complete installation guide for QuckApp backend
 ---
 
 # Installation Guide
@@ -42,8 +42,8 @@ This guide covers the complete installation process for both development and pro
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-org/quckchat-backend.git
-cd quckchat-backend
+git clone https://github.com/your-org/quckapp-backend.git
+cd quckapp-backend
 ```
 
 ### 2. Install Dependencies
@@ -64,7 +64,7 @@ Edit `.env` with your configuration:
 # Essential settings
 NODE_ENV=development
 PORT=3000
-MONGODB_URI_DEV=mongodb://localhost:27017/quckchat-dev
+MONGODB_URI_DEV=mongodb://localhost:27017/quckapp-dev
 JWT_SECRET=your-secure-secret-key-min-32-chars
 ```
 
@@ -91,7 +91,7 @@ docker run -d -p 27017:27017 --name mongodb mongo:6
 3. Get connection string
 4. Update `.env`:
 ```bash
-MONGODB_URI_PROD=mongodb+srv://user:pass@cluster.mongodb.net/quckchat
+MONGODB_URI_PROD=mongodb+srv://user:pass@cluster.mongodb.net/quckapp
 ```
 
 ### 5. Start Development Server

@@ -1,6 +1,6 @@
-# QuckChat CI/CD Setup Guide
+# QuckApp CI/CD Setup Guide
 
-This guide walks you through setting up automated deployments for QuckChat using GitHub Actions, AWS ECR, and EC2.
+This guide walks you through setting up automated deployments for QuckApp using GitHub Actions, AWS ECR, and EC2.
 
 ## Architecture Overview
 
@@ -36,7 +36,7 @@ This guide walks you through setting up automated deployments for QuckChat using
 ### 2.1 Create IAM User for GitHub Actions
 
 1. Go to AWS Console → IAM → Users → Create User
-2. Name: `github-actions-quckchat`
+2. Name: `github-actions-quckapp`
 3. Attach policies:
    - `AmazonEC2ContainerRegistryFullAccess`
    - `AmazonEC2FullAccess` (or create custom policy)
@@ -45,7 +45,7 @@ This guide walks you through setting up automated deployments for QuckChat using
 ### 2.2 Create EC2 Key Pair
 
 1. Go to AWS Console → EC2 → Key Pairs
-2. Create key pair: `quckchat-key`
+2. Create key pair: `quckapp-key`
 3. Download the `.pem` file
 4. Save it securely (you'll need the contents for GitHub Secrets)
 
@@ -64,7 +64,7 @@ nano environments/free-tier.tfvars
 Update `free-tier.tfvars`:
 ```hcl
 # Required changes:
-ec2_key_name      = "quckchat-key"
+ec2_key_name      = "quckapp-key"
 mongodb_atlas_uri = "mongodb+srv://user:pass@cluster.mongodb.net/quickchat"
 allowed_ssh_cidrs = ["YOUR_IP/32"]  # Get your IP: curl ifconfig.me
 ```
@@ -93,17 +93,17 @@ Add these secrets:
 | `AWS_SECRET_ACCESS_KEY` | Your IAM user secret key |
 | `EC2_HOST` | EC2 public IP (from terraform output) |
 | `EC2_USER` | `ec2-user` |
-| `EC2_SSH_KEY` | Contents of `quckchat-key.pem` file |
+| `EC2_SSH_KEY` | Contents of `quckapp-key.pem` file |
 | `SLACK_WEBHOOK_URL` | Slack incoming webhook URL (see below) |
 
 ### How to get EC2_SSH_KEY value:
 
 ```bash
 # On Windows (PowerShell)
-Get-Content quckchat-key.pem
+Get-Content quckapp-key.pem
 
 # On Mac/Linux
-cat quckchat-key.pem
+cat quckapp-key.pem
 ```
 
 Copy the entire output including:
@@ -117,7 +117,7 @@ Copy the entire output including:
 
 1. Go to https://api.slack.com/apps
 2. Click **Create New App** → **From scratch**
-3. Name: `QuckChat Deployments`, pick your workspace
+3. Name: `QuckApp Deployments`, pick your workspace
 4. Click **Incoming Webhooks** in the sidebar
 5. Toggle **Activate Incoming Webhooks** to ON
 6. Click **Add New Webhook to Workspace**
@@ -176,10 +176,10 @@ Go to GitHub → Actions → Backend CI/CD → Run workflow
 curl http://YOUR_EC2_IP:3000/health
 
 # SSH into EC2 to check logs
-ssh -i quckchat-key.pem ec2-user@YOUR_EC2_IP
+ssh -i quckapp-key.pem ec2-user@YOUR_EC2_IP
 
 # View Docker logs
-docker logs quckchat-dev-backend
+docker logs quckapp-dev-backend
 
 # View all running containers
 docker ps
@@ -203,16 +203,16 @@ The CI/CD pipeline (`.github/workflows/backend-ci-cd.yml`) does the following:
 
 ```bash
 # SSH into EC2
-ssh -i quckchat-key.pem ec2-user@YOUR_EC2_IP
+ssh -i quckapp-key.pem ec2-user@YOUR_EC2_IP
 
 # Check Docker logs
-docker logs quckchat-dev-backend
+docker logs quckapp-dev-backend
 
 # Check if container is running
 docker ps -a
 
 # Manual deploy
-/opt/quckchat-dev/deploy-docker.sh
+/opt/quckapp-dev/deploy-docker.sh
 ```
 
 ### ECR Login Failed
@@ -226,7 +226,7 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
 
 1. Check if the backend has a `/health` endpoint
 2. Verify the container is running: `docker ps`
-3. Check logs: `docker logs quckchat-dev-backend`
+3. Check logs: `docker logs quckapp-dev-backend`
 
 ## File Structure
 

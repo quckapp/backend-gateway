@@ -1,21 +1,21 @@
 {
   "id": "api-reference/openapi",
   "title": "OpenAPI Specification",
-  "description": "OpenAPI/Swagger specification for QuckChat API",
+  "description": "OpenAPI/Swagger specification for QuckApp API",
   "source": "@site/docs/api-reference/openapi.md",
   "sourceDirName": "api-reference",
   "slug": "/api-reference/openapi",
   "permalink": "/docs/api-reference/openapi",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/quckchat/backend/tree/main/docs/docs/api-reference/openapi.md",
+  "editUrl": "https://github.com/quckapp/backend/tree/main/docs/docs/api-reference/openapi.md",
   "tags": [],
   "version": "current",
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1,
     "title": "OpenAPI Specification",
-    "description": "OpenAPI/Swagger specification for QuckChat API"
+    "description": "OpenAPI/Swagger specification for QuckApp API"
   },
   "sidebar": "docsSidebar",
   "previous": {

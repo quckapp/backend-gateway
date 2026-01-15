@@ -2,16 +2,16 @@
 slug: /
 sidebar_position: 0
 title: Introduction
-description: Welcome to QuckChat documentation
+description: Welcome to QuckApp documentation
 ---
 
-# QuckChat Documentation
+# QuckApp Documentation
 
-Welcome to the QuckChat backend documentation. QuckChat is a real-time messaging platform with audio/video calling capabilities built on NestJS.
+Welcome to the QuckApp backend documentation. QuckApp is a real-time messaging platform with audio/video calling capabilities built on NestJS.
 
-## What is QuckChat?
+## What is QuckApp?
 
-QuckChat is a production-ready messaging backend that provides:
+QuckApp is a production-ready messaging backend that provides:
 
 - **Real-time Messaging** - Instant messaging with WebSocket support
 - **Voice & Video Calls** - WebRTC-powered calling
@@ -113,8 +113,8 @@ QuckChat is a production-ready messaging backend that provides:
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/quckchat-backend.git
-cd quckchat-backend
+git clone https://github.com/your-org/quckapp-backend.git
+cd quckapp-backend
 
 # Install dependencies
 npm install
@@ -140,7 +140,7 @@ open http://localhost:3000/api/docs
 ## Project Structure
 
 ```
-quckchat-backend/
+quckapp-backend/
 ├── src/
 │   ├── common/           # Shared modules
 │   │   ├── cache/        # Redis caching
@@ -166,7 +166,7 @@ quckchat-backend/
 
 ## Support
 
-- [GitHub Issues](https://github.com/your-org/quckchat-backend/issues)
+- [GitHub Issues](https://github.com/your-org/quckapp-backend/issues)
 - [API Documentation](http://localhost:3000/api/docs)
 
 ## License

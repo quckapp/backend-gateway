@@ -180,7 +180,7 @@ export class ExportService {
       fs.writeFileSync(filepath, JSON.stringify(exportData, null, 2));
     } else {
       // Generate human-readable text format
-      let textContent = `QuckChat Data Export\n`;
+      let textContent = `QuckApp Data Export\n`;
       textContent += `=====================\n`;
       textContent += `Exported at: ${exportData.exportedAt.toISOString()}\n\n`;
 

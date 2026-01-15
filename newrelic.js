@@ -11,7 +11,7 @@ exports.config = {
   /**
    * Application name shown in New Relic UI
    */
-  app_name: [process.env.NEW_RELIC_APP_NAME || 'QuckChat Backend'],
+  app_name: [process.env.NEW_RELIC_APP_NAME || 'QuckApp Backend'],
 
   /**
    * Your New Relic license key
@@ -167,6 +167,6 @@ exports.config = {
    */
   labels: {
     environment: process.env.NODE_ENV || 'development',
-    service: 'quckchat-backend',
+    service: 'quckapp-backend',
   },
 };

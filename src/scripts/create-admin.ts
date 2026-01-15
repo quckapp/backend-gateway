@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema(
 
 async function createAdmin() {
   const mongoUri =
-    process.env.MONGODB_URI_DEV || process.env.MONGODB_URI || 'mongodb://localhost:27017/quckchat';
+    process.env.MONGODB_URI_DEV || process.env.MONGODB_URI || 'mongodb://localhost:27017/quckapp';
 
   console.log('Connecting to MongoDB...');
   console.log('URI:', mongoUri.replace(/:[^:@]+@/, ':****@'));
@@ -44,7 +44,7 @@ async function createAdmin() {
   // Admin credentials
   const adminData = {
     phoneNumber: '+1234567890',
-    email: 'admin@quckchat.com',
+    email: 'admin@quckapp.com',
     password: await bcrypt.hash('Admin@123', 10),
     username: 'admin',
     displayName: 'Super Admin',

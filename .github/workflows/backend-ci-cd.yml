@@ -1,5 +1,5 @@
 # =============================================================================
-# QuckChat Backend CI/CD Pipeline
+# QuckApp Backend CI/CD Pipeline
 # =============================================================================
 # This workflow:
 # 1. Runs tests on all pushes/PRs
@@ -23,7 +23,7 @@ on:
 
 env:
   AWS_REGION: ap-south-1
-  ECR_REPOSITORY: quckchat-backend
+  ECR_REPOSITORY: quckapp-backend
   NODE_VERSION: '20'
 
 jobs:
@@ -153,15 +153,15 @@ jobs:
             docker pull ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
 
             # Stop existing container
-            docker stop quckchat-backend || true
-            docker rm quckchat-backend || true
+            docker stop quckapp-backend || true
+            docker rm quckapp-backend || true
 
             # Run new container
             docker run -d \
-              --name quckchat-backend \
+              --name quckapp-backend \
               --restart unless-stopped \
               -p 3000:3000 \
-              --env-file /opt/quckchat/.env \
+              --env-file /opt/quckapp/.env \
               ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
 
             # Cleanup old images

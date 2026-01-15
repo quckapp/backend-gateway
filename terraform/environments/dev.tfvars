@@ -3,7 +3,7 @@
 # =============================================================================
 
 # General
-project_name = "quckchat"
+project_name = "quckapp"
 environment  = "dev"
 team_name    = "platform"
 aws_region   = "us-east-1"
@@ -23,7 +23,7 @@ allowed_http_cidrs = ["0.0.0.0/0"]
 # Database (DocumentDB)
 db_instance_class          = "db.t3.medium"
 db_instance_count          = 1
-db_master_username         = "quckchat_admin"
+db_master_username         = "quckapp_admin"
 db_backup_retention_period = 1
 db_preferred_backup_window = "03:00-04:00"
 
@@ -34,7 +34,7 @@ redis_parameter_group_family = "redis7"
 redis_engine_version       = "7.0"
 
 # ECS/Fargate
-container_image    = "quckchat/backend:dev"
+container_image    = "quckapp/backend:dev"
 container_port     = 3000
 ecs_cpu            = 256
 ecs_memory         = 512

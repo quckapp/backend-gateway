@@ -53,21 +53,21 @@ variable "tags" {
 # -----------------------------------------------------------------------------
 
 resource "aws_cloudwatch_log_group" "application" {
-  name              = "/quckchat/${var.name_prefix}/application"
+  name              = "/quckapp/${var.name_prefix}/application"
   retention_in_days = var.log_retention_days
 
   tags = var.tags
 }
 
 resource "aws_cloudwatch_log_group" "access" {
-  name              = "/quckchat/${var.name_prefix}/access"
+  name              = "/quckapp/${var.name_prefix}/access"
   retention_in_days = var.log_retention_days
 
   tags = var.tags
 }
 
 resource "aws_cloudwatch_log_group" "error" {
-  name              = "/quckchat/${var.name_prefix}/error"
+  name              = "/quckapp/${var.name_prefix}/error"
   retention_in_days = var.log_retention_days
 
   tags = var.tags

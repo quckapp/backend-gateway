@@ -3,41 +3,41 @@ version: '3.8'
 services:
   redis:
     image: redis:7-alpine
-    container_name: quckchat-redis
+    container_name: quckapp-redis
     restart: unless-stopped
     ports:
       - '6379:6379'
     volumes:
       - redis_data:/data
     networks:
-      - quckchat-network
+      - quckapp-network
     command: redis-server --appendonly yes
 
   mongodb:
     image: mongo:7
-    container_name: quckchat-mongodb
+    container_name: quckapp-mongodb
     restart: unless-stopped
     environment:
-      MONGO_INITDB_DATABASE: quckchat
+      MONGO_INITDB_DATABASE: quckapp
     ports:
       - '27017:27017'
     volumes:
       - mongodb_data:/data/db
     networks:
-      - quckchat-network
+      - quckapp-network
 
   backend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: quckchat-backend
+    container_name: quckapp-backend
     restart: unless-stopped
     ports:
       - '3000:3000'
     env_file:
       - .env
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/quckchat
+      MONGODB_URI: mongodb://mongodb:27017/quckapp
       NODE_ENV: production
     depends_on:
       - mongodb
@@ -45,12 +45,12 @@ services:
       - ./uploads:/app/uploads
       - ./logs:/app/logs
     networks:
-      - quckchat-network
+      - quckapp-network
 
 volumes:
   mongodb_data:
   redis_data:
 
 networks:
-  quckchat-network:
+  quckapp-network:
     driver: bridge

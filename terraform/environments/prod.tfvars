@@ -3,7 +3,7 @@
 # =============================================================================
 
 # General
-project_name = "quckchat"
+project_name = "quckapp"
 environment  = "prod"
 team_name    = "platform"
 aws_region   = "us-east-1"
@@ -23,7 +23,7 @@ allowed_http_cidrs = ["0.0.0.0/0"]
 # Database (DocumentDB)
 db_instance_class          = "db.r5.large"
 db_instance_count          = 3  # Primary + 2 replicas
-db_master_username         = "quckchat_admin"
+db_master_username         = "quckapp_admin"
 db_backup_retention_period = 35
 db_preferred_backup_window = "03:00-04:00"
 
@@ -34,7 +34,7 @@ redis_parameter_group_family = "redis7"
 redis_engine_version       = "7.0"
 
 # ECS/Fargate
-container_image    = "quckchat/backend:latest"
+container_image    = "quckapp/backend:latest"
 container_port     = 3000
 ecs_cpu            = 1024
 ecs_memory         = 2048
@@ -50,12 +50,12 @@ ecs_memory_target_value = 80
 
 # S3
 s3_enable_versioning    = true
-s3_cors_allowed_origins = ["https://quckchat.com", "https://www.quckchat.com", "https://app.quckchat.com"]
+s3_cors_allowed_origins = ["https://quckapp.com", "https://www.quckapp.com", "https://app.quckapp.com"]
 s3_enable_lifecycle_rules = true
 
 # Monitoring
 log_retention_days       = 90
 enable_cloudwatch_alarms = true
-alarm_notification_email = "ops@quckchat.com"
+alarm_notification_email = "ops@quckapp.com"
 cpu_alarm_threshold      = 80
 memory_alarm_threshold   = 85

@@ -156,7 +156,7 @@ export class S3Service implements OnModuleInit {
     this.bucket =
       this.options?.bucket ||
       this.configService.get<string>('AWS_S3_BUCKET') ||
-      'quckchat-uploads';
+      'quckapp-uploads';
 
     this.defaultAcl = this.options?.defaultAcl || 'private';
     this.defaultCacheControl =

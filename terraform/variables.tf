@@ -1,5 +1,5 @@
 # =============================================================================
-# QuckChat Infrastructure - Variables Definition
+# QuckApp Infrastructure - Variables Definition
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 variable "project_name" {
   description = "Name of the project"
   type        = string
-  default     = "quckchat"
+  default     = "quckapp"
 }
 
 variable "environment" {
@@ -110,7 +110,7 @@ variable "db_instance_count" {
 variable "db_master_username" {
   description = "Master username for database"
   type        = string
-  default     = "quckchat_admin"
+  default     = "quckapp_admin"
 }
 
 variable "db_backup_retention_period" {
@@ -160,7 +160,7 @@ variable "redis_engine_version" {
 variable "container_image" {
   description = "Docker image for the application"
   type        = string
-  default     = "quckchat/backend:latest"
+  default     = "quckapp/backend:latest"
 }
 
 variable "container_port" {

@@ -2,7 +2,7 @@
 set -e
 
 # =============================================================================
-# QuckChat EC2 Setup Script
+# QuckApp EC2 Setup Script
 # =============================================================================
 # This script automatically sets up the EC2 instance with:
 # - Docker for container deployment
@@ -13,7 +13,7 @@ set -e
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 echo "=========================================="
-echo "Starting QuckChat Server Setup"
+echo "Starting QuckApp Server Setup"
 echo "=========================================="
 
 # Update system

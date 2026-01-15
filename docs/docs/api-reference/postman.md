@@ -1,21 +1,21 @@
 ---
 sidebar_position: 2
 title: Postman Collection
-description: Ready-to-use Postman collection for QuckChat API
+description: Ready-to-use Postman collection for QuckApp API
 ---
 
 # Postman Collection
 
-A complete Postman collection for testing the QuckChat API with pre-configured requests and environments.
+A complete Postman collection for testing the QuckApp API with pre-configured requests and environments.
 
 ## Downloads
 
 ### Collection
-[Download Postman Collection](/postman/QuckChat-API.postman_collection.json)
+[Download Postman Collection](/postman/QuckApp-API.postman_collection.json)
 
 ### Environments
-- [Development Environment](/postman/QuckChat-Development.postman_environment.json)
-- [Production Environment](/postman/QuckChat-Production.postman_environment.json)
+- [Development Environment](/postman/QuckApp-Development.postman_environment.json)
+- [Production Environment](/postman/QuckApp-Production.postman_environment.json)
 
 ## Import Instructions
 
@@ -35,7 +35,7 @@ A complete Postman collection for testing the QuckChat API with pre-configured r
 ## Collection Structure
 
 ```
-QuckChat API
+QuckApp API
 ├── Auth
 │   ├── Send OTP
 │   ├── Verify OTP
@@ -135,7 +135,7 @@ Authorization: Bearer {{accessToken}}
 
 ### 1. Setup
 1. Import collection and environment
-2. Select **QuckChat - Development** environment
+2. Select **QuckApp - Development** environment
 3. Set your `phoneNumber` variable
 
 ### 2. Authenticate
@@ -213,7 +213,7 @@ GET /messages/search/query?q=hello
 ### Production
 ```json
 {
-  "baseUrl": "https://api.quckchat.com/api/v1",
+  "baseUrl": "https://api.quckapp.com/api/v1",
   "phoneNumber": ""
 }
 ```
@@ -225,13 +225,13 @@ GET /messages/search/query?q=hello
 npm install -g newman
 
 # Run collection with environment
-newman run QuckChat-API.postman_collection.json \
-  -e QuckChat-Development.postman_environment.json \
+newman run QuckApp-API.postman_collection.json \
+  -e QuckApp-Development.postman_environment.json \
   --reporters cli,html
 
 # Run specific folder
-newman run QuckChat-API.postman_collection.json \
-  -e QuckChat-Development.postman_environment.json \
+newman run QuckApp-API.postman_collection.json \
+  -e QuckApp-Development.postman_environment.json \
   --folder "Auth"
 ```
 

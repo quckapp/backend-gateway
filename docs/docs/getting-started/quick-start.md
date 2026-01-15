@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Quick Start
-description: Get QuckChat backend running in 5 minutes
+description: Get QuckApp backend running in 5 minutes
 ---
 
 # Quick Start Guide
 
-Get the QuckChat backend running locally in just a few minutes.
+Get the QuckApp backend running locally in just a few minutes.
 
 ## Prerequisites
 
@@ -19,8 +19,8 @@ Get the QuckChat backend running locally in just a few minutes.
 
 ```bash
 # Clone and install
-git clone https://github.com/your-org/quckchat-backend.git
-cd quckchat-backend
+git clone https://github.com/your-org/quckapp-backend.git
+cd quckapp-backend
 npm install
 
 # Setup environment

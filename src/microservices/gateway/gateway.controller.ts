@@ -9,7 +9,7 @@ export class GatewayController {
   @Get()
   root() {
     return {
-      service: 'QuckChat API Gateway',
+      service: 'QuckApp API Gateway',
       version: '1.0.0',
       status: 'running',
       timestamp: new Date().toISOString(),

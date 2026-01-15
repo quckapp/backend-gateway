@@ -1,18 +1,18 @@
 ﻿/**
  * MongoDB to PostgreSQL User Migration Script
- * 
+ *
  * This script migrates user profiles, settings, and linked devices
  * from MongoDB to the Spring Boot PostgreSQL service.
- * 
+ *
  * Usage:
  *   npx ts-node scripts/migrate-users-to-postgres.ts [options]
- * 
+ *
  * Options:
  *   --dry-run      Simulate migration without making changes
  *   --batch-size   Number of users per batch (default: 100)
  *   --skip         Number of users to skip (for resuming)
  *   --limit        Maximum number of users to migrate
- * 
+ *
  * Environment Variables Required:
  *   MONGODB_URI - MongoDB connection string
  *   SPRING_AUTH_SERVICE_URL - Spring Boot auth service URL
@@ -416,7 +416,7 @@ function parseArgs(): MigrationConfig {
   const args = process.argv.slice(2);
 
   const config: MigrationConfig = {
-    mongoUri: process.env.MONGODB_URI || "mongodb://localhost:27017/quckchat",
+    mongoUri: process.env.MONGODB_URI || "mongodb://localhost:27017/quckapp",
     springUrl: process.env.SPRING_AUTH_SERVICE_URL || "http://localhost:8081/api/auth",
     apiKey: process.env.SPRING_AUTH_API_KEY || "",
     batchSize: 100,

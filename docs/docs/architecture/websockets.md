@@ -6,7 +6,7 @@ description: Real-time communication with Socket.IO
 
 # WebSocket Architecture
 
-QuckChat uses Socket.IO for real-time bidirectional communication, powering instant messaging and WebRTC call signaling.
+QuckApp uses Socket.IO for real-time bidirectional communication, powering instant messaging and WebRTC call signaling.
 
 ## Overview
 

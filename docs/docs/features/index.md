@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Features Overview
-description: Overview of all QuckChat features
+description: Overview of all QuckApp features
 ---
 
-# QuckChat Features
+# QuckApp Features
 
-This section documents all the features implemented in QuckChat, including both core messaging functionality and advanced features.
+This section documents all the features implemented in QuckApp, including both core messaging functionality and advanced features.
 
 ## Core Features
 
@@ -26,7 +26,7 @@ Send messages to multiple contacts without creating a group. Recipients receive 
 
 ### Linked Devices
 
-Use QuckChat on multiple devices simultaneously. All messages sync in real-time across all linked devices.
+Use QuckApp on multiple devices simultaneously. All messages sync in real-time across all linked devices.
 
 [Learn more about Linked Devices](/features/new-features#2--linked-devices)
 

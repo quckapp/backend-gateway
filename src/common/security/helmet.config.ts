@@ -337,9 +337,9 @@ export function buildEnterpriseHelmetConfig(
 }
 
 /**
- * Get default Helmet config for QuckChat
+ * Get default Helmet config for QuckApp
  */
-export function getQuckChatHelmetConfig(
+export function getQuckAppHelmetConfig(
   environment: 'development' | 'staging' | 'production',
   customOptions?: Partial<EnterpriseHelmetOptions>,
 ): HelmetOptions {

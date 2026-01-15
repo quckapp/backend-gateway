@@ -1,8 +1,8 @@
 {
   "info": {
-    "_postman_id": "quckchat-api-collection",
-    "name": "QuckChat API",
-    "description": "Complete API collection for QuckChat - Real-time messaging platform with audio/video calling",
+    "_postman_id": "quckapp-api-collection",
+    "name": "QuckApp API",
+    "description": "Complete API collection for QuckApp - Real-time messaging platform with audio/video calling",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -276,7 +276,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"displayName\": \"John Doe\",\n  \"bio\": \"Hello, I'm using QuckChat!\"\n}"
+              "raw": "{\n  \"displayName\": \"John Doe\",\n  \"bio\": \"Hello, I'm using QuckApp!\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/users/me",

@@ -6,7 +6,7 @@ description: Firebase setup for push notifications
 
 # Firebase Integration
 
-QuckChat uses Firebase Cloud Messaging (FCM) for push notifications on mobile and web.
+QuckApp uses Firebase Cloud Messaging (FCM) for push notifications on mobile and web.
 
 ## Setup Overview
 
@@ -22,7 +22,7 @@ QuckChat uses Firebase Cloud Messaging (FCM) for push notifications on mobile an
 
 1. Go to [Firebase Console](https://console.firebase.google.com/)
 2. Click **Add Project**
-3. Enter project name (e.g., `quckchat-prod`)
+3. Enter project name (e.g., `quckapp-prod`)
 4. Enable Google Analytics (optional)
 5. Click **Create Project**
 
@@ -30,7 +30,7 @@ QuckChat uses Firebase Cloud Messaging (FCM) for push notifications on mobile an
 
 #### Android App
 1. Click **Add App** > Android
-2. Enter package name (e.g., `com.quckchat.app`)
+2. Enter package name (e.g., `com.quckapp.app`)
 3. Download `google-services.json`
 4. Add to mobile project
 
@@ -65,17 +65,17 @@ QuckChat uses Firebase Cloud Messaging (FCM) for push notifications on mobile an
 
 ```bash
 # .env
-FIREBASE_PROJECT_ID_DEV=quckchat-dev
+FIREBASE_PROJECT_ID_DEV=quckapp-dev
 FIREBASE_PRIVATE_KEY_DEV="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhk...\n-----END PRIVATE KEY-----\n"
-FIREBASE_CLIENT_EMAIL_DEV=firebase-adminsdk@quckchat-dev.iam.gserviceaccount.com
+FIREBASE_CLIENT_EMAIL_DEV=firebase-adminsdk@quckapp-dev.iam.gserviceaccount.com
 ```
 
 ### Production
 
 ```bash
-FIREBASE_PROJECT_ID_PROD=quckchat-prod
+FIREBASE_PROJECT_ID_PROD=quckapp-prod
 FIREBASE_PRIVATE_KEY_PROD="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhk...\n-----END PRIVATE KEY-----\n"
-FIREBASE_CLIENT_EMAIL_PROD=firebase-adminsdk@quckchat-prod.iam.gserviceaccount.com
+FIREBASE_CLIENT_EMAIL_PROD=firebase-adminsdk@quckapp-prod.iam.gserviceaccount.com
 ```
 
 ### Important Notes
@@ -153,7 +153,7 @@ export class NotificationsService {
         priority: 'high',
         notification: {
           sound: 'default',
-          channelId: 'quckchat_messages',
+          channelId: 'quckapp_messages',
         },
       },
       apns: {

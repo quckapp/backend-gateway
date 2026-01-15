@@ -55,7 +55,7 @@ export class HttpService implements OnModuleDestroy {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        'User-Agent': `QuckChat-Backend/${this.configService.get('APP_VERSION') || '1.0.0'}`,
+        'User-Agent': `QuckApp-Backend/${this.configService.get('APP_VERSION') || '1.0.0'}`,
       },
       validateStatus: (status) => status < 500, // Resolve for all status < 500
     });

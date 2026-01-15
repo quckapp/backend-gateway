@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Architecture Overview
-description: High-level architecture of QuckChat backend
+description: High-level architecture of QuckApp backend
 ---
 
 # Architecture Overview
 
-QuckChat is built on a **microservices architecture** with an **API Gateway pattern**, designed for scalability, resilience, and maintainability.
+QuckApp is built on a **microservices architecture** with an **API Gateway pattern**, designed for scalability, resilience, and maintainability.
 
 ## System Architecture
 
@@ -164,7 +164,7 @@ QuckChat is built on a **microservices architecture** with an **API Gateway patt
 
 ## Feature Modules (29 Total)
 
-QuckChat has 29 feature modules organized by domain:
+QuckApp has 29 feature modules organized by domain:
 
 ### Core Modules
 

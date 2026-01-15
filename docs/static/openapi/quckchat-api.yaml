@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: QuckChat API
+  title: QuckApp API
   description: |
     Real-time messaging platform API with audio/video calling capabilities.
 
@@ -28,8 +28,8 @@ info:
     - WebRTC: `ws://localhost:3000/webrtc`
   version: 1.0.0
   contact:
-    name: QuckChat Support
-    email: support@quckchat.com
+    name: QuckApp Support
+    email: support@quckapp.com
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -37,7 +37,7 @@ info:
 servers:
   - url: http://localhost:3000/api/v1
     description: Development server
-  - url: https://api.quckchat.com/api/v1
+  - url: https://api.quckapp.com/api/v1
     description: Production server
 
 tags:

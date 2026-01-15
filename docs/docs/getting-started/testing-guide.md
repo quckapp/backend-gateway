@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: Testing Guide
-description: Complete guide to testing QuckChat features
+description: Complete guide to testing QuckApp features
 ---
 
 # Setup and Testing Guide

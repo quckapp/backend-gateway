@@ -6,14 +6,14 @@ description: Complete guide to setting up Firebase for push notifications
 
 # Firebase Push Notifications Setup Guide
 
-This guide will help you configure Firebase for push notifications in the QuckChat backend.
+This guide will help you configure Firebase for push notifications in the QuckApp backend.
 
 ## Step 1: Firebase Console Setup
 
 ### 1.1 Create or Access Your Firebase Project
 
 1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Your project: **quckchat-2a047**
+2. Your project: **quckapp-2a047**
 3. If you don't have a project, create one:
    - Click "Add project"
    - Enter project name
@@ -34,10 +34,10 @@ The downloaded JSON file looks like this:
 ```json
 {
   "type": "service_account",
-  "project_id": "quckchat-2a047",
+  "project_id": "quckapp-2a047",
   "private_key_id": "...",
   "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-xxxxx@quckchat-2a047.iam.gserviceaccount.com",
+  "client_email": "firebase-adminsdk-xxxxx@quckapp-2a047.iam.gserviceaccount.com",
   ...
 }
 ```
@@ -54,9 +54,9 @@ Extract these three values:
 Add to your `.env` file:
 
 ```env
-FIREBASE_PROJECT_ID=quckchat-2a047
+FIREBASE_PROJECT_ID=quckapp-2a047
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCwGg5xkhDjpfBB\n...\n-----END PRIVATE KEY-----\n"
-FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@quckchat-2a047.iam.gserviceaccount.com
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@quckapp-2a047.iam.gserviceaccount.com
 ```
 
 **Important Notes:**
@@ -174,8 +174,8 @@ Monitor server logs for:
 ## Current Configuration
 
 Your Firebase project is already configured:
-- **Project ID**: quckchat-2a047
-- **Service Account**: firebase-adminsdk-fbsvc@quckchat-2a047.iam.gserviceaccount.com
+- **Project ID**: quckapp-2a047
+- **Service Account**: firebase-adminsdk-fbsvc@quckapp-2a047.iam.gserviceaccount.com
 - Push notifications are **enabled** and working
 
 ## Additional Resources

@@ -479,7 +479,7 @@ export class ConsulService implements OnModuleInit, OnModuleDestroy {
   }): Promise<string> {
     try {
       const result = await this.client.session.create({
-        name: options?.name || `quckchat-${process.pid}`,
+        name: options?.name || `quckapp-${process.pid}`,
         ttl: options?.ttl || '30s',
         behavior: options?.behavior || 'release',
         lockdelay: options?.lockDelay || '15s',

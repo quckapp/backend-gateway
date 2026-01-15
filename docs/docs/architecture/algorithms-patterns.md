@@ -1,12 +1,12 @@
 ---
 sidebar_position: 7
 title: Algorithms & Patterns
-description: Algorithms, data structures, and design patterns used in QuckChat
+description: Algorithms, data structures, and design patterns used in QuckApp
 ---
 
 # Algorithms & Design Patterns
 
-This document outlines the algorithms, data structures, design principles, and patterns implemented throughout QuckChat.
+This document outlines the algorithms, data structures, design principles, and patterns implemented throughout QuckApp.
 
 ## Algorithms Implemented
 

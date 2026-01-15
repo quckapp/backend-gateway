@@ -1,8 +1,8 @@
 {
   "info": {
-    "_postman_id": "quckchat-api-collection",
-    "name": "QuckChat API",
-    "description": "API Integration Tests for QuckChat Backend",
+    "_postman_id": "quckapp-api-collection",
+    "name": "QuckApp API",
+    "description": "API Integration Tests for QuckApp Backend",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [

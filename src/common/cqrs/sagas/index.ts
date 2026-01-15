@@ -36,7 +36,7 @@ export class UserSagas {
         return new SendNotificationCommand(
           event.userId,
           'welcome',
-          'Welcome to QuckChat!',
+          'Welcome to QuckApp!',
           'Thanks for joining. Start chatting with friends and family.',
           { userId: event.userId },
           ['push', 'in_app'],

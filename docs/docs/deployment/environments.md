@@ -6,7 +6,7 @@ description: Development, staging, and production environment setup
 
 # Environment Configuration
 
-QuckChat supports multiple deployment environments with environment-specific configurations.
+QuckApp supports multiple deployment environments with environment-specific configurations.
 
 ## Environment Overview
 
@@ -35,7 +35,7 @@ npm run start:dev
 # .env - Development minimum
 NODE_ENV=development
 PORT=3000
-MONGODB_URI_DEV=mongodb://localhost:27017/quckchat-dev
+MONGODB_URI_DEV=mongodb://localhost:27017/quckapp-dev
 JWT_SECRET=dev-secret-key-at-least-32-characters-long
 ```
 
@@ -48,7 +48,7 @@ API_PREFIX=api/v1
 BASE_URL=http://localhost:3000
 
 # Database
-MONGODB_URI_DEV=mongodb://localhost:27017/quckchat-dev
+MONGODB_URI_DEV=mongodb://localhost:27017/quckapp-dev
 
 # Auth
 JWT_SECRET=dev-secret-key-at-least-32-characters-long
@@ -87,7 +87,7 @@ npm run docker:infra
 # .env.test
 NODE_ENV=test
 PORT=3001
-MONGODB_URI=mongodb://localhost:27017/quckchat-test
+MONGODB_URI=mongodb://localhost:27017/quckapp-test
 JWT_SECRET=test-secret-key-for-testing
 LOG_LEVEL=error
 ```
@@ -136,10 +136,10 @@ afterAll(async () => {
 NODE_ENV=staging
 PORT=3000
 API_PREFIX=api/v1
-BASE_URL=https://staging.quckchat.com
+BASE_URL=https://staging.quckapp.com
 
 # Cloud Database
-MONGODB_URI_PROD=mongodb+srv://user:pass@staging-cluster.mongodb.net/quckchat-staging
+MONGODB_URI_PROD=mongodb+srv://user:pass@staging-cluster.mongodb.net/quckapp-staging
 
 # Auth (use staging secrets)
 JWT_SECRET=staging-secret-key-different-from-prod
@@ -151,7 +151,7 @@ REDIS_PORT=6379
 
 # Storage
 STORAGE_MODE=s3
-AWS_S3_BUCKET=quckchat-staging-uploads
+AWS_S3_BUCKET=quckapp-staging-uploads
 
 # Monitoring
 SENTRY_DSN=https://xxx@sentry.io/staging-project
@@ -176,10 +176,10 @@ docker-compose -f docker-compose.staging.yml up -d
 NODE_ENV=production
 PORT=3000
 API_PREFIX=api/v1
-BASE_URL=https://api.quckchat.com
+BASE_URL=https://api.quckapp.com
 
 # Database (Atlas)
-MONGODB_URI_PROD=mongodb+srv://prod-user:secure-password@prod-cluster.mongodb.net/quckchat
+MONGODB_URI_PROD=mongodb+srv://prod-user:secure-password@prod-cluster.mongodb.net/quckapp
 
 # Auth (strong secrets)
 JWT_SECRET=<64-character-random-string>
@@ -196,12 +196,12 @@ STORAGE_MODE=s3
 AWS_ACCESS_KEY_ID=<access-key>
 AWS_SECRET_ACCESS_KEY=<secret-key>
 AWS_REGION=us-east-1
-AWS_S3_BUCKET=quckchat-prod-uploads
+AWS_S3_BUCKET=quckapp-prod-uploads
 
 # Firebase (Production)
-FIREBASE_PROJECT_ID_PROD=quckchat-prod
+FIREBASE_PROJECT_ID_PROD=quckapp-prod
 FIREBASE_PRIVATE_KEY_PROD="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
-FIREBASE_CLIENT_EMAIL_PROD=firebase-adminsdk@quckchat-prod.iam.gserviceaccount.com
+FIREBASE_CLIENT_EMAIL_PROD=firebase-adminsdk@quckapp-prod.iam.gserviceaccount.com
 
 # Twilio (Production)
 TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxx
@@ -284,7 +284,7 @@ VAULT_SECRET_ID=xxx
 # In application code
 import { SecretsManager } from '@aws-sdk/client-secrets-manager';
 const client = new SecretsManager({ region: 'us-east-1' });
-const secret = await client.getSecretValue({ SecretId: 'quckchat/prod' });
+const secret = await client.getSecretValue({ SecretId: 'quckapp/prod' });
 ```
 
 ## Feature Flags by Environment
@@ -308,7 +308,7 @@ curl http://localhost:3000/api/v1/health
 
 ### Production
 ```bash
-curl https://api.quckchat.com/api/v1/health
+curl https://api.quckapp.com/api/v1/health
 ```
 
 ### Expected Response

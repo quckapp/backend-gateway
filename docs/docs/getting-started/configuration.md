@@ -6,7 +6,7 @@ description: Environment variables and configuration reference
 
 # Configuration Reference
 
-Complete reference for all environment variables used by QuckChat backend.
+Complete reference for all environment variables used by QuckApp backend.
 
 ## Environment Files
 
@@ -44,8 +44,8 @@ BASE_URL=http://localhost:3000
 | `MONGODB_URI` | No | - | Fallback URI |
 
 ```bash
-MONGODB_URI_DEV=mongodb://localhost:27017/quckchat-dev
-MONGODB_URI_PROD=mongodb+srv://user:pass@cluster.mongodb.net/quckchat
+MONGODB_URI_DEV=mongodb://localhost:27017/quckapp-dev
+MONGODB_URI_PROD=mongodb+srv://user:pass@cluster.mongodb.net/quckapp
 ```
 
 ### Authentication
@@ -116,7 +116,7 @@ STORAGE_MODE=s3
 AWS_ACCESS_KEY_ID=AKIAXXXXXXXXXXXXXXXX
 AWS_SECRET_ACCESS_KEY=your-secret-key
 AWS_REGION=us-east-1
-AWS_S3_BUCKET=quckchat-uploads
+AWS_S3_BUCKET=quckapp-uploads
 ```
 
 ### Redis
@@ -153,7 +153,7 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
-SMTP_FROM=QuckChat <noreply@quckchat.com>
+SMTP_FROM=QuckApp <noreply@quckapp.com>
 ```
 
 ## Message Brokers
@@ -163,7 +163,7 @@ SMTP_FROM=QuckChat <noreply@quckchat.com>
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `KAFKA_BROKERS` | No | `localhost:9092` | Kafka broker addresses |
-| `KAFKA_CLIENT_ID` | No | `quckchat-backend` | Client identifier |
+| `KAFKA_CLIENT_ID` | No | `quckapp-backend` | Client identifier |
 | `KAFKA_SSL` | No | `false` | Enable SSL |
 | `KAFKA_SASL_MECHANISM` | No | `plain` | SASL mechanism |
 | `KAFKA_SASL_USERNAME` | No | - | SASL username |
@@ -245,7 +245,7 @@ STUN_SERVER_URL=stun:stun.l.google.com:19302
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `DD_TRACE_ENABLED` | No | `false` | Enable Datadog tracing |
-| `DD_SERVICE` | No | `quckchat-backend` | Service name |
+| `DD_SERVICE` | No | `quckapp-backend` | Service name |
 | `DD_ENV` | No | `development` | Environment |
 
 ## Service Discovery
@@ -272,7 +272,7 @@ STUN_SERVER_URL=stun:stun.l.google.com:19302
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `LOG_LEVEL` | No | `info` | Log level: fatal, error, warn, info, debug, trace |
-| `SERVICE_NAME` | No | `quckchat-backend` | Service identifier |
+| `SERVICE_NAME` | No | `quckapp-backend` | Service identifier |
 | `LOG_PRETTY_PRINT` | No | `true` | Pretty print logs (dev) |
 
 ## Feature Flags
@@ -288,7 +288,7 @@ STUN_SERVER_URL=stun:stun.l.google.com:19302
 ```bash
 NODE_ENV=development
 PORT=3000
-MONGODB_URI_DEV=mongodb://localhost:27017/quckchat-dev
+MONGODB_URI_DEV=mongodb://localhost:27017/quckapp-dev
 JWT_SECRET=dev-secret-key-32-chars-minimum
 USE_REDIS_IN_DEV=false
 LOG_LEVEL=debug
@@ -298,7 +298,7 @@ LOG_LEVEL=debug
 ```bash
 NODE_ENV=production
 PORT=3000
-MONGODB_URI_PROD=mongodb+srv://user:pass@cluster.mongodb.net/quckchat
+MONGODB_URI_PROD=mongodb+srv://user:pass@cluster.mongodb.net/quckapp
 JWT_SECRET=production-ultra-secure-key-here
 REDIS_HOST=redis.internal
 STORAGE_MODE=s3
@@ -310,6 +310,6 @@ LOG_LEVEL=info
 ```bash
 NODE_ENV=test
 PORT=3001
-MONGODB_URI=mongodb://localhost:27017/quckchat-test
+MONGODB_URI=mongodb://localhost:27017/quckapp-test
 JWT_SECRET=test-secret-key-for-testing
 ```

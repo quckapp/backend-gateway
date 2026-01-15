@@ -31,7 +31,7 @@ import { KafkaModule } from '../../common/kafka/kafka.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        clientId: configService.get('KAFKA_CLIENT_ID') || 'quckchat-auth',
+        clientId: configService.get('KAFKA_CLIENT_ID') || 'quckapp-auth',
         brokers: (configService.get('KAFKA_BROKERS') || 'localhost:9092').split(','),
         ssl: configService.get('KAFKA_SSL') === 'true',
       }),

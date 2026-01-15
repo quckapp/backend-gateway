@@ -6,7 +6,7 @@ description: Complete push notification implementation guide
 
 # Push Notifications Setup
 
-Push notifications are **fully implemented** in QuckChat! This guide will help you enable them in production.
+Push notifications are **fully implemented** in QuckApp! This guide will help you enable them in production.
 
 ## What's Already Implemented
 
@@ -49,13 +49,13 @@ Push notifications are **fully implemented** in QuckChat! This guide will help y
 #### Variable 1: FIREBASE_PROJECT_ID
 
 ```
-FIREBASE_PROJECT_ID=quckchat-2a047
+FIREBASE_PROJECT_ID=quckapp-2a047
 ```
 
 #### Variable 2: FIREBASE_CLIENT_EMAIL
 
 ```
-FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@quckchat-2a047.iam.gserviceaccount.com
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@quckapp-2a047.iam.gserviceaccount.com
 ```
 
 #### Variable 3: FIREBASE_PRIVATE_KEY

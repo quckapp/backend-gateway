@@ -27,7 +27,7 @@ export interface KafkaModuleAsyncOptions {
  * ```typescript
  * // In app.module.ts
  * KafkaModule.forRoot({
- *   clientId: 'quckchat-backend',
+ *   clientId: 'quckapp-backend',
  *   brokers: ['localhost:9092'],
  * })
  *

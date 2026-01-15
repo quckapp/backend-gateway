@@ -1,6 +1,6 @@
-# QuckChat Backend
+# QuckApp Backend
 
-Production-ready NestJS backend for QuckChat - a real-time chat application with audio/video calling capabilities.
+Production-ready NestJS backend for QuckApp - a real-time chat application with audio/video calling capabilities.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=white)](https://nestjs.com/)
@@ -31,8 +31,8 @@ Production-ready NestJS backend for QuckChat - a real-time chat application with
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/QuckChat/quckchat-backend.git
-cd quckchat-backend
+git clone https://github.com/QuckApp/quckapp-backend.git
+cd quckapp-backend
 ```
 
 2. **Install dependencies**
@@ -47,7 +47,7 @@ cp .env.example .env
 
 Edit `.env` file with your configuration:
 ```env
-MONGODB_URI=mongodb://localhost:27017/quckchat
+MONGODB_URI=mongodb://localhost:27017/quckapp
 JWT_SECRET=your-super-secret-jwt-key
 JWT_REFRESH_SECRET=your-refresh-secret-key
 ENCRYPTION_KEY=your-32-character-encryption-key
@@ -200,7 +200,7 @@ See `.env.example` for all configuration options:
 ## 📱 Mobile App
 
 This backend works with our React Native mobile app:
-👉 [QuckChat Mobile](https://github.com/QuckChat/quckchat-mobile)
+👉 [QuckApp Mobile](https://github.com/QuckApp/quckapp-mobile)
 
 ## 🧪 Testing
 

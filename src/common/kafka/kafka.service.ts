@@ -153,7 +153,7 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
       this.options?.brokers || this.configService.get<string>('KAFKA_BROKERS') || 'localhost:9092';
     const brokers = Array.isArray(brokersConfig) ? brokersConfig : brokersConfig.split(',');
     const clientId =
-      this.options?.clientId || this.configService.get<string>('KAFKA_CLIENT_ID') || 'quckchat-backend';
+      this.options?.clientId || this.configService.get<string>('KAFKA_CLIENT_ID') || 'quckapp-backend';
 
     this.kafka = new Kafka({
       clientId,

@@ -19,7 +19,7 @@ if (isEnabled) {
 
   tracer.init({
     // Service identification
-    service: process.env.DD_SERVICE || 'quckchat-backend',
+    service: process.env.DD_SERVICE || 'quckapp-backend',
     env: process.env.DD_ENV || process.env.NODE_ENV || 'development',
     version: process.env.DD_VERSION || process.env.APP_VERSION || '1.0.0',
 
@@ -35,7 +35,7 @@ if (isEnabled) {
 
     // Tags
     tags: {
-      'app.name': 'quckchat',
+      'app.name': 'quckapp',
       'app.type': 'backend',
     },
 
@@ -61,19 +61,19 @@ if (isEnabled) {
   });
 
   tracer.use('mongodb-core', {
-    service: 'quckchat-mongodb',
+    service: 'quckapp-mongodb',
   });
 
   tracer.use('ioredis', {
-    service: 'quckchat-redis',
+    service: 'quckapp-redis',
   });
 
   tracer.use('kafkajs', {
-    service: 'quckchat-kafka',
+    service: 'quckapp-kafka',
   });
 
   tracer.use('amqplib', {
-    service: 'quckchat-rabbitmq',
+    service: 'quckapp-rabbitmq',
   });
 
   tracer.use('grpc', {

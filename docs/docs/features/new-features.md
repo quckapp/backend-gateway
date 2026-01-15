@@ -1,12 +1,12 @@
 ---
 sidebar_position: 2
 title: New Features
-description: Documentation for new QuckChat features
+description: Documentation for new QuckApp features
 ---
 
 # New Features Implementation
 
-This document details the implementation of 5 major new features for QuckChat:
+This document details the implementation of 5 major new features for QuckApp:
 
 1. **Broadcast Lists** - Send messages to multiple contacts without creating a group
 2. **Linked Devices** - Multi-device support for seamless cross-platform usage
@@ -79,7 +79,7 @@ POST /broadcast/:id/send
 
 ### Description
 
-Use QuckChat on multiple devices simultaneously. All messages sync in real-time across all linked devices.
+Use QuckApp on multiple devices simultaneously. All messages sync in real-time across all linked devices.
 
 ### MongoDB Schema
 

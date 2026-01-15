@@ -6,7 +6,7 @@ description: Elixir/Phoenix real-time communication server
 
 # Realtime Service (Elixir/Phoenix)
 
-QuckChat uses a dedicated **Elixir/Phoenix real-time server** designed for massive concurrency (500K+ connections) with sub-millisecond latency.
+QuckApp uses a dedicated **Elixir/Phoenix real-time server** designed for massive concurrency (500K+ connections) with sub-millisecond latency.
 
 ## Overview
 
@@ -250,13 +250,13 @@ Event streaming for audit/analytics.
 
 | Topic | Event | Payload |
 |-------|-------|---------|
-| `quckchat.messages.created` | message.created | Message data |
-| `quckchat.messages.delivered` | message.delivered | Message ID + user |
-| `quckchat.messages.read` | message.read | Message ID + user |
-| `quckchat.calls.events` | call.* | Call data + status |
-| `quckchat.presence.events` | presence.changed | User ID + status |
-| `quckchat.typing.events` | typing.* | Conversation + state |
-| `quckchat.users.events` | user.* | Connect/disconnect |
+| `quckapp.messages.created` | message.created | Message data |
+| `quckapp.messages.delivered` | message.delivered | Message ID + user |
+| `quckapp.messages.read` | message.read | Message ID + user |
+| `quckapp.calls.events` | call.* | Call data + status |
+| `quckapp.presence.events` | presence.changed | User ID + status |
+| `quckapp.typing.events` | typing.* | Conversation + state |
+| `quckapp.users.events` | user.* | Connect/disconnect |
 
 ## HTTP API
 
@@ -306,7 +306,7 @@ JWT_SECRET=must-match-nestjs-backend
 
 # Databases
 MONGODB_URL=mongodb+srv://...
-DATABASE_URL=mysql://user:pass@host/quckchat_realtime
+DATABASE_URL=mysql://user:pass@host/quckapp_realtime
 REDIS_URL=redis://localhost:6379
 
 # Kafka
@@ -333,21 +333,21 @@ CLUSTER_DNS=realtime.internal
 ### runtime.exs
 
 ```elixir
-config :quckchat_realtime, QuckChatRealtimeWeb.Endpoint,
+config :quckapp_realtime, QuckAppRealtimeWeb.Endpoint,
   url: [host: "localhost"],
   http: [port: String.to_integer(System.get_env("PORT") || "4000")]
 
-config :quckchat_realtime, :jwt,
+config :quckapp_realtime, :jwt,
   secret: System.fetch_env!("JWT_SECRET")
 
-config :quckchat_realtime, :mongodb,
+config :quckapp_realtime, :mongodb,
   url: System.fetch_env!("MONGODB_URL")
 
-config :quckchat_realtime, :redis,
+config :quckapp_realtime, :redis,
   url: System.fetch_env!("REDIS_URL"),
   pool_size: 10
 
-config :quckchat_realtime, :ice_servers, [
+config :quckapp_realtime, :ice_servers, [
   %{urls: System.get_env("STUN_SERVER_URL")},
   %{
     urls: System.get_env("TURN_SERVER_URL"),
@@ -373,9 +373,9 @@ RUN mix release
 FROM alpine:3.18
 RUN apk add --no-cache libstdc++ ncurses-libs
 WORKDIR /app
-COPY --from=builder /app/_build/prod/rel/quckchat_realtime ./
+COPY --from=builder /app/_build/prod/rel/quckapp_realtime ./
 EXPOSE 4000
-CMD ["bin/quckchat_realtime", "start"]
+CMD ["bin/quckapp_realtime", "start"]
 ```
 
 ### Docker Compose
@@ -411,7 +411,7 @@ services:
   mysql:
     image: mysql:8
     environment:
-      MYSQL_DATABASE: quckchat_realtime
+      MYSQL_DATABASE: quckapp_realtime
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - mysql_data:/var/lib/mysql
@@ -439,7 +439,7 @@ config :libcluster,
       strategy: Cluster.Strategy.Kubernetes.DNS,
       config: [
         service: "realtime-headless",
-        application_name: "quckchat_realtime"
+        application_name: "quckapp_realtime"
       ]
     ]
   ]
@@ -466,7 +466,7 @@ config :libcluster,
 ```
 realtime/
 ├── lib/
-│   ├── quckchat_realtime/
+│   ├── quckapp_realtime/
 │   │   ├── application.ex          # OTP supervision tree
 │   │   ├── call_manager.ex         # 1-on-1 calls
 │   │   ├── huddle_manager.ex       # Group rooms
@@ -477,7 +477,7 @@ realtime/
 │   │   └── kafka/
 │   │       ├── producer.ex
 │   │       └── consumer.ex
-│   └── quckchat_realtime_web/
+│   └── quckapp_realtime_web/
 │       ├── channels/
 │       │   ├── user_socket.ex      # WebSocket entry
 │       │   ├── chat_channel.ex     # Messaging

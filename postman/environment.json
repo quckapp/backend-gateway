@@ -1,6 +1,6 @@
 {
-  "id": "quckchat-local-env",
-  "name": "QuckChat Local",
+  "id": "quckapp-local-env",
+  "name": "QuckApp Local",
   "values": [
     {
       "key": "baseUrl",

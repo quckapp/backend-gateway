@@ -6,7 +6,7 @@
 # =============================================================================
 
 # General
-project_name = "quckchat"
+project_name = "quckapp"
 environment  = "dev"
 aws_region   = "ap-south-1"  # Mumbai region
 
@@ -22,7 +22,7 @@ allowed_ssh_cidrs = ["0.0.0.0/0"]  # TODO: Change to ["YOUR_IP/32"]
 
 # EC2 (Free Tier)
 ec2_instance_type = "t2.micro"  # Free tier eligible
-ec2_key_name      = "quckchat-key"  # Create this in AWS Console first!
+ec2_key_name      = "quckapp-key"  # Create this in AWS Console first!
 
 # Application
 container_port = 3000

@@ -90,7 +90,7 @@ const defaultSerializers = {
 export function buildPinoOptions(options: PinoLoggerOptions = {}): LoggerOptions {
   const isDevelopment = process.env.NODE_ENV === 'development';
   const {
-    serviceName = process.env.SERVICE_NAME || 'quckchat-backend',
+    serviceName = process.env.SERVICE_NAME || 'quckapp-backend',
     level = process.env.LOG_LEVEL || (isDevelopment ? 'debug' : 'info'),
     prettyPrint = isDevelopment,
     redactFields = DEFAULT_REDACT_FIELDS,

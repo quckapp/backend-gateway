@@ -55,7 +55,7 @@ async function seedAdmin() {
       const hashedPassword = await bcrypt.hash('admin123', 10);
       await User.create({
         phoneNumber: '+1234567890',
-        email: 'admin@quckchat.com',
+        email: 'admin@quckapp.com',
         password: hashedPassword,
         username: 'admin',
         displayName: 'Admin User',

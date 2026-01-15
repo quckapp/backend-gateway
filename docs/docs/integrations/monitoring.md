@@ -6,7 +6,7 @@ description: Sentry, OpenTelemetry, Prometheus, and logging setup
 
 # Monitoring & Observability
 
-QuckChat uses a comprehensive monitoring stack for error tracking, distributed tracing, metrics, and logging.
+QuckApp uses a comprehensive monitoring stack for error tracking, distributed tracing, metrics, and logging.
 
 ## Overview
 
@@ -63,7 +63,7 @@ Sentry.setTag('module', 'messages');
 
 ```env
 OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318
-OTEL_SERVICE_NAME=quckchat-backend
+OTEL_SERVICE_NAME=quckapp-backend
 ```
 
 ### Features
@@ -78,7 +78,7 @@ OTEL_SERVICE_NAME=quckchat-backend
 ```typescript
 import { trace } from '@opentelemetry/api';
 
-const tracer = trace.getTracer('quckchat');
+const tracer = trace.getTracer('quckapp');
 
 const span = tracer.startSpan('send-message');
 try {
@@ -135,7 +135,7 @@ const responseHistogram = new Histogram({
 ```env
 DD_API_KEY=your-datadog-api-key
 DD_SITE=datadoghq.com
-DD_SERVICE=quckchat
+DD_SERVICE=quckapp
 DD_ENV=production
 ```
 
@@ -152,7 +152,7 @@ DD_ENV=production
 
 ```env
 NEW_RELIC_LICENSE_KEY=your-license-key
-NEW_RELIC_APP_NAME=QuckChat Backend
+NEW_RELIC_APP_NAME=QuckApp Backend
 NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true
 ```
 

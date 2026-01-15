@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Railway Deployment
-description: Deploy QuckChat to Railway
+description: Deploy QuckApp to Railway
 ---
 
 # Railway Environment Variables Setup

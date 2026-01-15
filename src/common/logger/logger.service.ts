@@ -144,7 +144,7 @@ export class LoggerService implements NestLoggerService {
       levels: customLevels.levels,
       level: process.env.LOG_LEVEL || (isDevelopment ? 'debug' : 'info'),
       defaultMeta: {
-        service: process.env.SERVICE_NAME || 'quckchat-backend',
+        service: process.env.SERVICE_NAME || 'quckapp-backend',
         environment: process.env.NODE_ENV || 'development',
         version: process.env.APP_VERSION || '1.0.0',
       },
