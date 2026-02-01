@@ -16,6 +16,7 @@ export class SpringJwtStrategy extends PassportStrategy(Strategy, 'spring-jwt') 
     private springAuthClient: SpringAuthClientService,
   ) {
     const jwtSecret = configService.get('JWT_SECRET');
+
     console.log('=== [SpringJwtStrategy] Constructor called ===');
     console.log('[SpringJwtStrategy] JWT Secret length:', jwtSecret?.length || 0);
     console.log('[SpringJwtStrategy] JWT Secret first 10 chars:', jwtSecret?.substring(0, 10));

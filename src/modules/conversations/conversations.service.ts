@@ -58,7 +58,7 @@ export class ConversationsService {
   async findById(id: string): Promise<ConversationDocument> {
     const conversation = await this.conversationModel
       .findById(id)
-      .populate('participants.userId', '-password')
+      // Note: Don't populate participants.userId - it's a UUID from Spring auth, not a MongoDB ObjectId
       .populate('lastMessage')
       .exec();
 
@@ -71,20 +71,19 @@ export class ConversationsService {
 
   // Get all conversations for a user
   async getUserConversations(userId: string): Promise<ConversationDocument[]> {
+    console.log('[ConversationsService] getUserConversations called with userId:', userId);
+
     const conversations = await this.conversationModel
       .find({
         'participants.userId': userId,
         isArchived: false,
       })
-      .populate({
-        path: 'participants.userId',
-        model: 'User',
-        select: '-password',
-      })
+      // Note: Don't populate participants.userId - it's a UUID from Spring auth, not a MongoDB ObjectId
       .populate('lastMessage')
       .sort({ lastMessageAt: -1 })
       .exec();
 
+    console.log('[ConversationsService] Found', conversations.length, 'conversations');
     return conversations;
   }
 

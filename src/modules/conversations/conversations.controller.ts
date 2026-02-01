@@ -47,6 +47,24 @@ export class ConversationsController {
     return this.conversationsService.createSingleConversation(req.user.userId, recipientId);
   }
 
+  @Post('direct/:userId')
+  @ApiOperation({ summary: 'Create or get direct conversation with user' })
+  @ApiParam({ name: 'userId', description: 'User ID to start conversation with' })
+  async getOrCreateDirectConversation(
+    @Request() req: AuthRequest,
+    @Param('userId') recipientId: string,
+  ) {
+    const conversation = await this.conversationsService.createSingleConversation(
+      req.user.userId,
+      recipientId,
+    );
+    // Wrap in ServiceResponseDto format for Flutter client
+    return {
+      success: true,
+      data: conversation,
+    };
+  }
+
   @Post('group')
   async createGroupConversation(
     @Request() req: AuthRequest,
@@ -64,7 +82,16 @@ export class ConversationsController {
 
   @Get()
   async getUserConversations(@Request() req: AuthRequest) {
-    return this.conversationsService.getUserConversations(req.user.userId);
+    const conversations = await this.conversationsService.getUserConversations(req.user.userId);
+    // Wrap in ServiceResponseDto format for Flutter client
+    return {
+      success: true,
+      data: {
+        items: conversations,
+        total: conversations.length,
+        hasMore: false,
+      },
+    };
   }
 
   @Get(':id')

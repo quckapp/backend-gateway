@@ -11,10 +11,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private configService: ConfigService,
     private usersService: UsersService,
   ) {
+    const jwtSecret = configService.get('JWT_SECRET');
+
+    console.log('[JwtStrategy] Constructor called');
+    console.log('[JwtStrategy] JWT Secret length:', jwtSecret?.length || 0);
+    console.log('[JwtStrategy] JWT Secret first 10 chars:', jwtSecret?.substring(0, 10));
+
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.get('JWT_SECRET'),
+      secretOrKey: jwtSecret,
     });
   }
 
