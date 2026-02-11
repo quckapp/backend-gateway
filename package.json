@@ -127,7 +127,7 @@
     "amqp-connection-manager": "^5.0.0",
     "amqplib": "^0.10.9",
     "archiver": "^7.0.1",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "bcrypt": "^5.1.1",
     "bullmq": "^5.65.1",
     "cache-manager": "^7.2.5",
