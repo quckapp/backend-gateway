@@ -152,7 +152,7 @@
     "i18next": "^25.7.1",
     "ioredis": "^5.8.2",
     "kafkajs": "^2.2.4",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "migrate-mongo": "^14.0.7",
     "mongoose": "^8.0.3",
     "mongoose-autopopulate": "^1.2.1",
