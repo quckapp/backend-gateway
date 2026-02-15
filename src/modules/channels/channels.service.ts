@@ -31,7 +31,7 @@ export class ChannelsService {
     workspaceId: string,
     createDto: CreateChannelDto,
     creatorId: string,
-  ): Promise<Channel> {
+  ): Promise<ChannelDocument> {
     // Verify workspace access
     const membership = await this.workspacesService.getMember(workspaceId, creatorId);
     if (!membership) {
@@ -142,7 +142,7 @@ export class ChannelsService {
     });
   }
 
-  async findOne(channelId: string, userId?: string): Promise<Channel> {
+  async findOne(channelId: string, userId?: string): Promise<ChannelDocument> {
     const channel = await this.channelModel.findById(channelId);
     if (!channel || channel.status === ChannelStatus.DELETED) {
       throw new NotFoundException('Channel not found');
@@ -159,7 +159,7 @@ export class ChannelsService {
     return channel;
   }
 
-  async findBySlug(workspaceId: string, slug: string, userId: string): Promise<Channel> {
+  async findBySlug(workspaceId: string, slug: string, userId: string): Promise<ChannelDocument> {
     const channel = await this.channelModel.findOne({
       workspaceId: new Types.ObjectId(workspaceId),
       slug,
@@ -185,7 +185,7 @@ export class ChannelsService {
     channelId: string,
     updateDto: UpdateChannelDto,
     userId: string,
-  ): Promise<Channel> {
+  ): Promise<ChannelDocument> {
     const channel = await this.findOne(channelId);
     await this.validateAdminAccess(channelId, userId);
 
@@ -203,7 +203,7 @@ export class ChannelsService {
     return channel.save();
   }
 
-  async archive(channelId: string, userId: string): Promise<Channel> {
+  async archive(channelId: string, userId: string): Promise<ChannelDocument> {
     const channel = await this.findOne(channelId);
     await this.validateAdminAccess(channelId, userId);
 
@@ -218,7 +218,7 @@ export class ChannelsService {
     return channel.save();
   }
 
-  async unarchive(channelId: string, userId: string): Promise<Channel> {
+  async unarchive(channelId: string, userId: string): Promise<ChannelDocument> {
     const channel = await this.channelModel.findById(channelId);
     if (!channel) {
       throw new NotFoundException('Channel not found');
@@ -268,7 +268,7 @@ export class ChannelsService {
     return { members, total };
   }
 
-  async getMember(channelId: string, userId: string): Promise<ChannelMember | null> {
+  async getMember(channelId: string, userId: string): Promise<ChannelMemberDocument | null> {
     return this.memberModel.findOne({
       channelId: new Types.ObjectId(channelId),
       userId: new Types.ObjectId(userId),
@@ -352,7 +352,7 @@ export class ChannelsService {
     channelId: string,
     userId: string,
     preferences: UpdateMemberPreferencesDto,
-  ): Promise<ChannelMember> {
+  ): Promise<ChannelMemberDocument> {
     const member = await this.getMember(channelId, userId);
     if (!member) {
       throw new NotFoundException('You are not a member of this channel');
@@ -366,7 +366,7 @@ export class ChannelsService {
     channelId: string,
     userId: string,
     messageId?: string,
-  ): Promise<ChannelMember> {
+  ): Promise<ChannelMemberDocument> {
     const member = await this.getMember(channelId, userId);
     if (!member) {
       throw new NotFoundException('You are not a member of this channel');
@@ -397,28 +397,36 @@ export class ChannelsService {
     return counts;
   }
 
-  async pinMessage(channelId: string, messageId: string, userId: string): Promise<Channel> {
+  async pinMessage(channelId: string, messageId: string, userId: string): Promise<ChannelDocument> {
     await this.validateAdminAccess(channelId, userId);
 
-    return this.channelModel.findByIdAndUpdate(
+    const updated = await this.channelModel.findByIdAndUpdate(
       channelId,
       { $addToSet: { 'settings.pinnedMessageIds': new Types.ObjectId(messageId) } },
       { new: true },
     );
+    if (!updated) {
+      throw new NotFoundException('Channel not found');
+    }
+    return updated;
   }
 
-  async unpinMessage(channelId: string, messageId: string, userId: string): Promise<Channel> {
+  async unpinMessage(channelId: string, messageId: string, userId: string): Promise<ChannelDocument> {
     await this.validateAdminAccess(channelId, userId);
 
-    return this.channelModel.findByIdAndUpdate(
+    const updated = await this.channelModel.findByIdAndUpdate(
       channelId,
       { $pull: { 'settings.pinnedMessageIds': new Types.ObjectId(messageId) } },
       { new: true },
     );
+    if (!updated) {
+      throw new NotFoundException('Channel not found');
+    }
+    return updated;
   }
 
   // Create default "general" channel for workspace
-  async createDefaultChannel(workspaceId: string, creatorId: string): Promise<Channel> {
+  async createDefaultChannel(workspaceId: string, creatorId: string): Promise<ChannelDocument> {
     const channel = await this.create(
       workspaceId,
       {
@@ -447,6 +455,9 @@ export class ChannelsService {
     if (member.role !== ChannelMemberRole.ADMIN) {
       // Also check workspace admin
       const channel = await this.channelModel.findById(channelId);
+      if (!channel) {
+        throw new NotFoundException('Channel not found');
+      }
       const workspaceMember = await this.workspacesService.getMember(
         channel.workspaceId.toString(),
         userId,

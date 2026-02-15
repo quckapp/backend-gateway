@@ -184,7 +184,7 @@ export class FilesService {
     return { files, total, page, limit };
   }
 
-  async findOne(fileId: string, userId?: string): Promise<File> {
+  async findOne(fileId: string, userId?: string): Promise<FileDocument> {
     const file = await this.fileModel.findById(fileId);
     if (!file || file.status === FileStatus.DELETED) {
       throw new NotFoundException('File not found');
@@ -204,7 +204,7 @@ export class FilesService {
     return file;
   }
 
-  async update(fileId: string, dto: UpdateFileDto, userId: string): Promise<File> {
+  async update(fileId: string, dto: UpdateFileDto, userId: string): Promise<FileDocument> {
     const file = await this.findOne(fileId, userId);
 
     // Only uploader or admins can update

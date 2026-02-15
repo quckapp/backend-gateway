@@ -88,7 +88,7 @@ export class WorkspacesService {
     return this.workspaceModel.find(query).sort({ 'usage.lastActivityAt': -1 });
   }
 
-  async findOne(id: string): Promise<Workspace> {
+  async findOne(id: string): Promise<WorkspaceDocument> {
     const workspace = await this.workspaceModel.findById(id);
     if (!workspace || workspace.status === WorkspaceStatus.DELETED) {
       throw new NotFoundException('Workspace not found');
@@ -96,7 +96,7 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async findBySlug(slug: string): Promise<Workspace> {
+  async findBySlug(slug: string): Promise<WorkspaceDocument> {
     const workspace = await this.workspaceModel.findOne({
       slug,
       status: { $ne: WorkspaceStatus.DELETED },
@@ -107,7 +107,7 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async findByInviteCode(inviteCode: string): Promise<Workspace> {
+  async findByInviteCode(inviteCode: string): Promise<WorkspaceDocument> {
     const workspace = await this.workspaceModel.findOne({
       inviteCode,
       status: WorkspaceStatus.ACTIVE,
@@ -118,7 +118,7 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async update(id: string, updateDto: UpdateWorkspaceDto, userId: string): Promise<Workspace> {
+  async update(id: string, updateDto: UpdateWorkspaceDto, userId: string): Promise<WorkspaceDocument> {
     const workspace = await this.findOne(id);
 
     // Check permissions
@@ -184,7 +184,7 @@ export class WorkspacesService {
     return { members, total };
   }
 
-  async getMember(workspaceId: string, userId: string): Promise<WorkspaceMember | null> {
+  async getMember(workspaceId: string, userId: string): Promise<WorkspaceMemberDocument | null> {
     return this.memberModel.findOne({
       workspaceId: new Types.ObjectId(workspaceId),
       userId: new Types.ObjectId(userId),
@@ -218,7 +218,7 @@ export class WorkspacesService {
     userId: string,
     role: WorkspaceRole = WorkspaceRole.MEMBER,
     inviterId?: string,
-  ): Promise<WorkspaceMember> {
+  ): Promise<WorkspaceMemberDocument> {
     // Check if already a member
     const existing = await this.memberModel.findOne({
       workspaceId: new Types.ObjectId(workspaceId),
@@ -261,7 +261,7 @@ export class WorkspacesService {
     memberId: string,
     updateDto: UpdateMemberRoleDto,
     requesterId: string,
-  ): Promise<WorkspaceMember> {
+  ): Promise<WorkspaceMemberDocument> {
     await this.validateAdminAccess(workspaceId, requesterId);
 
     const member = await this.memberModel.findOne({

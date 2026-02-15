@@ -23,7 +23,7 @@ import {
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ChannelsService } from './channels.service';
 import { CreateChannelDto, UpdateChannelDto, UpdateMemberPreferencesDto, PinMessageDto } from './dto';
-import { Channel, ChannelType, ChannelStatus } from './schemas/channel.schema';
+import { Channel, ChannelDocument, ChannelType, ChannelStatus } from './schemas/channel.schema';
 import { ChannelMember, ChannelMemberRole } from './schemas/channel-member.schema';
 
 @ApiTags('Channels')
@@ -237,7 +237,7 @@ export class ChannelsController {
     @Param('id') id: string,
     @Body() body: PinMessageDto,
     @Request() req: any,
-  ): Promise<Channel> {
+  ): Promise<ChannelDocument> {
     return this.channelsService.pinMessage(id, body.messageId, req.user.id);
   }
 
@@ -251,7 +251,7 @@ export class ChannelsController {
     @Param('id') id: string,
     @Param('messageId') messageId: string,
     @Request() req: any,
-  ): Promise<Channel> {
+  ): Promise<ChannelDocument> {
     return this.channelsService.unpinMessage(id, messageId, req.user.id);
   }
 }

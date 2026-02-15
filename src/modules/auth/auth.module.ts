@@ -12,6 +12,10 @@ import { OAuthService } from './oauth.service';
 import { TokenService } from './token.service';
 import { PasswordService } from './password.service';
 import { SpringAuthClientService } from './spring-auth-client.service';
+import { SpringServicesClientService } from './spring-services-client.service';
+import { SpringJwtAuthGuard } from './guards/spring-jwt-auth.guard';
+import { PermissionGuard } from './guards/permission.guard';
+import { AuditInterceptor } from './interceptors/audit.interceptor';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { SpringJwtStrategy } from './strategies/spring-jwt.strategy';
 import { GoogleStrategy } from './strategies/google.strategy';
@@ -36,7 +40,7 @@ import { KafkaModule } from '../../common/kafka/kafka.module';
         ssl: configService.get('KAFKA_SSL') === 'true',
       }),
     }),
-    PassportModule.register({ session: true }),
+    PassportModule.register({ defaultStrategy: 'spring-jwt' }),
     MongooseModule.forFeature([{ name: UserSettings.name, schema: UserSettingsSchema }]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -57,6 +61,10 @@ import { KafkaModule } from '../../common/kafka/kafka.module';
     TokenService,
     PasswordService,
     SpringAuthClientService,
+    SpringServicesClientService,
+    SpringJwtAuthGuard,
+    PermissionGuard,
+    AuditInterceptor,
     JwtStrategy,
     SpringJwtStrategy,
     GoogleStrategy,
@@ -70,6 +78,10 @@ import { KafkaModule } from '../../common/kafka/kafka.module';
     TokenService,
     PasswordService,
     SpringAuthClientService,
+    SpringServicesClientService,
+    SpringJwtAuthGuard,
+    PermissionGuard,
+    AuditInterceptor,
     JwtModule,
   ],
 })

@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -23,9 +24,22 @@ import { ConversationsService } from './conversations.service';
 import { MessagesService } from '../messages/messages.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AiService } from '../../common/services/ai.service';
+import { UserProfileClientService, SpringUserProfile } from '../users/user-profile-client.service';
 
 interface AuthRequest extends Request {
   user: { userId: string; email: string };
+}
+
+interface EnrichedParticipant {
+  userId: string;
+  displayName?: string;
+  phoneNumber?: string;
+  avatarUrl?: string;
+  joinedAt: Date;
+  lastReadMessageId: string;
+  unreadCount: number;
+  isMuted: boolean;
+  isPinned: boolean;
 }
 
 @ApiTags('Conversations')
@@ -33,10 +47,13 @@ interface AuthRequest extends Request {
 @Controller('conversations')
 @UseGuards(JwtAuthGuard)
 export class ConversationsController {
+  private readonly logger = new Logger(ConversationsController.name);
+
   constructor(
     private conversationsService: ConversationsService,
     private messagesService: MessagesService,
     private aiService: AiService,
+    private userProfileClient: UserProfileClientService,
   ) {}
 
   @Post('single')
@@ -58,10 +75,12 @@ export class ConversationsController {
       req.user.userId,
       recipientId,
     );
+    // Enrich with user details
+    const [enrichedConversation] = await this.enrichConversationsWithUserDetails([conversation]);
     // Wrap in ServiceResponseDto format for Flutter client
     return {
       success: true,
-      data: conversation,
+      data: enrichedConversation,
     };
   }
 
@@ -83,20 +102,113 @@ export class ConversationsController {
   @Get()
   async getUserConversations(@Request() req: AuthRequest) {
     const conversations = await this.conversationsService.getUserConversations(req.user.userId);
+
+    // Enrich participant data with user details (displayName, phoneNumber)
+    const enrichedConversations = await this.enrichConversationsWithUserDetails(conversations);
+
     // Wrap in ServiceResponseDto format for Flutter client
     return {
       success: true,
       data: {
-        items: conversations,
-        total: conversations.length,
+        items: enrichedConversations,
+        total: enrichedConversations.length,
         hasMore: false,
       },
     };
   }
 
+  /**
+   * Enrich conversations with user details (displayName, phoneNumber) from user-service
+   */
+  private async enrichConversationsWithUserDetails(conversations: any[]): Promise<any[]> {
+    if (!conversations || conversations.length === 0) {
+      return conversations;
+    }
+
+    try {
+      // Collect all unique user IDs from all conversations
+      const allUserIds = new Set<string>();
+      for (const conv of conversations) {
+        if (conv.participants) {
+          for (const p of conv.participants) {
+            if (p.userId) {
+              allUserIds.add(p.userId);
+            }
+          }
+        }
+      }
+
+      if (allUserIds.size === 0) {
+        return conversations;
+      }
+
+      // Fetch user profiles from user-service
+      const userIds = Array.from(allUserIds);
+      this.logger.log(`Fetching user profiles for ${userIds.length} users: ${userIds.join(', ')}`);
+
+      let userProfiles: SpringUserProfile[] = [];
+      try {
+        userProfiles = await this.userProfileClient.getUsersByIds(userIds);
+        this.logger.log(`Got ${userProfiles.length} user profiles`);
+        // Debug: Log phone numbers
+        for (const profile of userProfiles) {
+          this.logger.log(`User ${profile.id}: displayName=${profile.displayName}, phoneNumber=${profile.phoneNumber}`);
+        }
+      } catch (error) {
+        this.logger.warn(`Failed to fetch user profiles: ${error.message}`);
+        // Return conversations without enrichment if user-service fails
+        return conversations;
+      }
+
+      // Create a map for quick lookup
+      const userMap = new Map<string, SpringUserProfile>();
+      for (const profile of userProfiles) {
+        userMap.set(profile.id, profile);
+        // Also map by externalId if available
+        if (profile.externalId) {
+          userMap.set(profile.externalId, profile);
+        }
+      }
+
+      // Enrich each conversation's participants
+      return conversations.map((conv) => {
+        const convObj = conv.toObject ? conv.toObject() : { ...conv };
+
+        if (convObj.participants && Array.isArray(convObj.participants)) {
+          convObj.participants = convObj.participants.map((p: any) => {
+            const participantUserId = p.userId?.toString() || p.userId;
+            const userProfile = userMap.get(participantUserId);
+
+            this.logger.debug(`Enriching participant ${participantUserId}: found=${!!userProfile}, phoneNumber=${userProfile?.phoneNumber}`);
+
+            return {
+              ...p,
+              userId: participantUserId,
+              displayName: userProfile?.displayName || null,
+              phoneNumber: userProfile?.phoneNumber || null,
+              avatarUrl: userProfile?.avatar || null,
+            } as EnrichedParticipant;
+          });
+        }
+
+        return convObj;
+      });
+    } catch (error) {
+      this.logger.error(`Error enriching conversations: ${error.message}`);
+      // Return original conversations if enrichment fails
+      return conversations;
+    }
+  }
+
   @Get(':id')
   async getConversation(@Param('id') id: string) {
-    return this.conversationsService.findById(id);
+    const conversation = await this.conversationsService.findById(id);
+    // Enrich with user details
+    const [enrichedConversation] = await this.enrichConversationsWithUserDetails([conversation]);
+    return {
+      success: true,
+      data: enrichedConversation,
+    };
   }
 
   @Put(':id')

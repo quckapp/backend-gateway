@@ -58,13 +58,15 @@ export class UserProfileClientService {
   async getUsersByIds(ids: string[]): Promise<SpringUserProfile[]> {
     if (!ids || ids.length === 0) return [];
     const params = ids.map(id => `ids=${id}`).join('&');
-    return this.request<SpringUserProfile[]>('GET', `/batch?${params}`);
+    // Use internal endpoint with API key auth
+    return this.requestInternal<SpringUserProfile[]>('GET', `/internal/users/profiles/batch?${params}`);
   }
 
   async getUsersByExternalIds(externalIds: string[]): Promise<SpringUserProfile[]> {
     if (!externalIds || externalIds.length === 0) return [];
     const params = externalIds.map(id => `externalIds=${id}`).join('&');
-    return this.request<SpringUserProfile[]>('GET', `/batch/external?${params}`);
+    // Use internal endpoint with API key auth
+    return this.requestInternal<SpringUserProfile[]>('GET', `/internal/users/profiles/batch/external?${params}`);
   }
 
   async searchUsers(query: string, excludeUserId?: string, page = 0, size = 20): Promise<SpringPagedResult<SpringUserProfileSummary>> {
@@ -181,6 +183,59 @@ export class UserProfileClientService {
   }
 
   // ==================== Helper Methods ====================
+
+  /**
+   * Make a request to internal endpoints (API key authenticated)
+   * Uses base URL without /v1/users suffix
+   */
+  private async requestInternal<T>(
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    path: string,
+    data?: any,
+  ): Promise<T> {
+    // Remove /v1/users from base URL to get the internal endpoint base
+    const internalBaseUrl = this.baseUrl.replace('/v1/users', '/v1');
+    const url = `${internalBaseUrl}${path}`;
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'X-API-Key': this.apiKey,
+    };
+
+    try {
+      let response: any;
+
+      switch (method) {
+        case 'GET':
+          response = await this.httpService.get(url, { headers, timeout: this.timeout });
+          break;
+        case 'POST':
+          response = await this.httpService.post(url, data, { headers, timeout: this.timeout });
+          break;
+        case 'PUT':
+          response = await this.httpService.put(url, data, { headers, timeout: this.timeout });
+          break;
+        case 'DELETE':
+          response = await this.httpService.delete(url, { headers, timeout: this.timeout });
+          break;
+      }
+
+      return response.data;
+    } catch (error) {
+      this.logger.error(`Spring Internal API error: ${method} ${path}`, error.message);
+
+      if (error.response) {
+        throw new HttpException(
+          error.response.data?.message || 'Spring Internal API error',
+          error.response.status || HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+
+      throw new HttpException(
+        'Spring Profile service unavailable',
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+  }
 
   private async request<T>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
