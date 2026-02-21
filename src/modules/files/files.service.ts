@@ -7,7 +7,12 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { ConfigService } from '@nestjs/config';
-import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+  GetObjectCommand,
+} from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { v4 as uuidv4 } from 'uuid';
 import * as path from 'path';
@@ -60,7 +65,9 @@ export class FilesService {
     // Validate file size
     const maxSize = this.configService.get('MAX_FILE_SIZE', 100 * 1024 * 1024); // 100MB default
     if (dto.size > maxSize) {
-      throw new BadRequestException(`File size exceeds maximum allowed (${maxSize / 1024 / 1024}MB)`);
+      throw new BadRequestException(
+        `File size exceeds maximum allowed (${maxSize / 1024 / 1024}MB)`,
+      );
     }
 
     // Determine file type from MIME
@@ -112,7 +119,7 @@ export class FilesService {
     workspaceId: string,
     dto: CompleteUploadDto,
     userId: string,
-  ): Promise<File> {
+  ): Promise<FileDocument> {
     const file = await this.fileModel.findOne({
       _id: new Types.ObjectId(dto.fileId),
       workspaceId: new Types.ObjectId(workspaceId),
@@ -184,7 +191,7 @@ export class FilesService {
     return { files, total, page, limit };
   }
 
-  async findOne(fileId: string, userId?: string): Promise<File> {
+  async findOne(fileId: string, userId?: string): Promise<FileDocument> {
     const file = await this.fileModel.findById(fileId);
     if (!file || file.status === FileStatus.DELETED) {
       throw new NotFoundException('File not found');
@@ -204,7 +211,7 @@ export class FilesService {
     return file;
   }
 
-  async update(fileId: string, dto: UpdateFileDto, userId: string): Promise<File> {
+  async update(fileId: string, dto: UpdateFileDto, userId: string): Promise<FileDocument> {
     const file = await this.findOne(fileId, userId);
 
     // Only uploader or admins can update
@@ -259,10 +266,7 @@ export class FilesService {
     const file = await this.findOne(fileId, userId);
 
     // Increment download count
-    await this.fileModel.updateOne(
-      { _id: file._id },
-      { $inc: { downloadCount: 1 } },
-    );
+    await this.fileModel.updateOne({ _id: file._id }, { $inc: { downloadCount: 1 } });
 
     // Generate presigned download URL
     const command = new GetObjectCommand({
@@ -306,7 +310,10 @@ export class FilesService {
     return { files, total };
   }
 
-  async getStorageStats(workspaceId: string, userId: string): Promise<{
+  async getStorageStats(
+    workspaceId: string,
+    userId: string,
+  ): Promise<{
     totalFiles: number;
     totalSize: number;
     byType: Record<FileType, { count: number; size: number }>;

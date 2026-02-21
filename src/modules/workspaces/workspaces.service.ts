@@ -16,7 +16,12 @@ import {
   WorkspaceRole,
   MemberStatus,
 } from './schemas/workspace-member.schema';
-import { CreateWorkspaceDto, UpdateWorkspaceDto, InviteMemberDto, UpdateMemberRoleDto } from './dto';
+import {
+  CreateWorkspaceDto,
+  UpdateWorkspaceDto,
+  InviteMemberDto,
+  UpdateMemberRoleDto,
+} from './dto';
 
 @Injectable()
 export class WorkspacesService {
@@ -27,7 +32,7 @@ export class WorkspacesService {
     private memberModel: Model<WorkspaceMemberDocument>,
   ) {}
 
-  async create(createDto: CreateWorkspaceDto, ownerId: string): Promise<Workspace> {
+  async create(createDto: CreateWorkspaceDto, ownerId: string): Promise<WorkspaceDocument> {
     // Generate slug if not provided
     const slug = createDto.slug || this.generateSlug(createDto.name);
 
@@ -88,7 +93,7 @@ export class WorkspacesService {
     return this.workspaceModel.find(query).sort({ 'usage.lastActivityAt': -1 });
   }
 
-  async findOne(id: string): Promise<Workspace> {
+  async findOne(id: string): Promise<WorkspaceDocument> {
     const workspace = await this.workspaceModel.findById(id);
     if (!workspace || workspace.status === WorkspaceStatus.DELETED) {
       throw new NotFoundException('Workspace not found');
@@ -96,7 +101,7 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async findBySlug(slug: string): Promise<Workspace> {
+  async findBySlug(slug: string): Promise<WorkspaceDocument> {
     const workspace = await this.workspaceModel.findOne({
       slug,
       status: { $ne: WorkspaceStatus.DELETED },
@@ -107,7 +112,7 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async findByInviteCode(inviteCode: string): Promise<Workspace> {
+  async findByInviteCode(inviteCode: string): Promise<WorkspaceDocument> {
     const workspace = await this.workspaceModel.findOne({
       inviteCode,
       status: WorkspaceStatus.ACTIVE,
@@ -118,7 +123,11 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async update(id: string, updateDto: UpdateWorkspaceDto, userId: string): Promise<Workspace> {
+  async update(
+    id: string,
+    updateDto: UpdateWorkspaceDto,
+    userId: string,
+  ): Promise<WorkspaceDocument> {
     const workspace = await this.findOne(id);
 
     // Check permissions
@@ -184,7 +193,7 @@ export class WorkspacesService {
     return { members, total };
   }
 
-  async getMember(workspaceId: string, userId: string): Promise<WorkspaceMember | null> {
+  async getMember(workspaceId: string, userId: string): Promise<WorkspaceMemberDocument | null> {
     return this.memberModel.findOne({
       workspaceId: new Types.ObjectId(workspaceId),
       userId: new Types.ObjectId(userId),
@@ -210,7 +219,9 @@ export class WorkspacesService {
 
     // TODO: Look up user by email or create invitation
     // For now, assume we have a user ID
-    throw new BadRequestException('User lookup by email not implemented - use addMember with userId');
+    throw new BadRequestException(
+      'User lookup by email not implemented - use addMember with userId',
+    );
   }
 
   async addMember(
@@ -417,6 +428,9 @@ export class WorkspacesService {
       updateOps[`usage.${key}`] = value;
     }
 
-    await this.workspaceModel.updateOne({ _id: new Types.ObjectId(workspaceId) }, { $inc: updateOps });
+    await this.workspaceModel.updateOne(
+      { _id: new Types.ObjectId(workspaceId) },
+      { $inc: updateOps },
+    );
   }
 }
