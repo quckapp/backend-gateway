@@ -229,7 +229,7 @@ export class WorkspacesService {
     userId: string,
     role: WorkspaceRole = WorkspaceRole.MEMBER,
     inviterId?: string,
-  ): Promise<WorkspaceMember> {
+  ): Promise<WorkspaceMemberDocument> {
     // Check if already a member
     const existing = await this.memberModel.findOne({
       workspaceId: new Types.ObjectId(workspaceId),
@@ -272,7 +272,7 @@ export class WorkspacesService {
     memberId: string,
     updateDto: UpdateMemberRoleDto,
     requesterId: string,
-  ): Promise<WorkspaceMember> {
+  ): Promise<WorkspaceMemberDocument> {
     await this.validateAdminAccess(workspaceId, requesterId);
 
     const member = await this.memberModel.findOne({

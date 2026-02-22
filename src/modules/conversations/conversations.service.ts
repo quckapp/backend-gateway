@@ -10,10 +10,15 @@ export class ConversationsService {
   ) {}
 
   async createSingleConversation(userId1: string, userId2: string): Promise<ConversationDocument> {
+    // Normalize participant order by sorting IDs to prevent duplicate conversations
+    // This ensures that regardless of who initiates, the same conversation is found/created
+    const [sortedUser1, sortedUser2] = [userId1, userId2].sort();
+
     const existing = await this.conversationModel
       .findOne({
         type: 'single',
-        'participants.userId': { $all: [userId1, userId2] },
+        'participants.userId': { $all: [sortedUser1, sortedUser2] },
+        $expr: { $eq: [{ $size: '$participants' }, 2] },
       })
       .exec();
 
@@ -23,8 +28,8 @@ export class ConversationsService {
 
     const conversation = new this.conversationModel({
       type: 'single',
-      participants: [{ userId: userId1 }, { userId: userId2 }],
-      createdBy: userId1,
+      participants: [{ userId: sortedUser1 }, { userId: sortedUser2 }],
+      createdBy: userId1, // Keep original initiator as creator
     });
 
     return conversation.save();
@@ -53,7 +58,7 @@ export class ConversationsService {
   async findById(id: string): Promise<ConversationDocument> {
     const conversation = await this.conversationModel
       .findById(id)
-      .populate('participants.userId', '-password')
+      // Note: Don't populate participants.userId - it's a UUID from Spring auth, not a MongoDB ObjectId
       .populate('lastMessage')
       .exec();
 
@@ -66,20 +71,19 @@ export class ConversationsService {
 
   // Get all conversations for a user
   async getUserConversations(userId: string): Promise<ConversationDocument[]> {
+    console.log('[ConversationsService] getUserConversations called with userId:', userId);
+
     const conversations = await this.conversationModel
       .find({
         'participants.userId': userId,
         isArchived: false,
       })
-      .populate({
-        path: 'participants.userId',
-        model: 'User',
-        select: '-password',
-      })
+      // Note: Don't populate participants.userId - it's a UUID from Spring auth, not a MongoDB ObjectId
       .populate('lastMessage')
       .sort({ lastMessageAt: -1 })
       .exec();
 
+    console.log('[ConversationsService] Found', conversations.length, 'conversations');
     return conversations;
   }
 

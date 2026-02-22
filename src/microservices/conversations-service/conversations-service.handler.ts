@@ -391,16 +391,20 @@ export class ConversationsServiceHandler {
     userId2: string;
   }): Promise<IServiceResponse<ConversationDto>> {
     try {
+      // Normalize participant order by sorting IDs to prevent duplicate conversations
+      // This ensures that regardless of who initiates, the same conversation is found/created
+      const [sortedUser1, sortedUser2] = [dto.userId1, dto.userId2].sort();
+
       // Check if direct conversation exists
-      const existing = await this.findDirectConversation(dto.userId1, dto.userId2);
+      const existing = await this.findDirectConversation(sortedUser1, sortedUser2);
       if (existing) {
         return successResponse(this.toConversationDto(existing), SERVICES.CONVERSATIONS_SERVICE);
       }
 
-      // Create new direct conversation
+      // Create new direct conversation with sorted participants
       return this.createConversation({
         type: 'direct',
-        participants: [dto.userId1, dto.userId2],
+        participants: [sortedUser1, sortedUser2],
       });
     } catch (error: any) {
       this.logger.error(

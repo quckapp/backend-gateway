@@ -152,13 +152,15 @@ export class LoggerService implements NestLoggerService {
       exitOnError: false,
     });
 
-    // Handle uncaught exceptions
-    this.logger.exceptions.handle(
-      new winston.transports.File({
-        filename: path.join(logDir, 'exceptions.log'),
-        format: jsonFormat,
-      }),
-    );
+    // Handle uncaught exceptions (only in production to avoid file stream issues)
+    if (!isDevelopment) {
+      this.logger.exceptions.handle(
+        new winston.transports.File({
+          filename: path.join(logDir, 'exceptions.log'),
+          format: jsonFormat,
+        }),
+      );
+    }
 
     LoggerService.instance = this;
   }

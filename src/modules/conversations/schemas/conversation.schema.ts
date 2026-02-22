@@ -29,7 +29,7 @@ export class Conversation {
   @Prop({
     type: [
       {
-        userId: { type: MongooseSchema.Types.ObjectId, ref: 'User', required: true },
+        userId: { type: String, required: true }, // UUID from Spring auth
         joinedAt: { type: Date, default: Date.now },
         lastReadMessageId: { type: String, default: null },
         unreadCount: { type: Number, default: 0 },
@@ -45,7 +45,7 @@ export class Conversation {
   @Prop({ type: [String], default: [] })
   admins: string[];
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
+  @Prop({ type: String }) // UUID from Spring auth
   createdBy: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Message' })
@@ -74,7 +74,7 @@ export class Conversation {
   @Prop()
   disappearingMessagesUpdatedAt: Date;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
+  @Prop({ type: String }) // UUID from Spring auth
   disappearingMessagesUpdatedBy: string;
 }
 
