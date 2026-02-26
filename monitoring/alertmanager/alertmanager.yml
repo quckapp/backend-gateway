@@ -44,7 +44,7 @@ receivers:
   - name: 'default-receiver'
     # Webhook to custom endpoint (configure as needed)
     # webhook_configs:
-    #   - url: 'http://host.docker.internal:3000/api/webhooks/alerts'
+    #   - url: 'http://host.docker.internal:3000/api/v1/webhooks/alerts'
     #     send_resolved: true
 
   - name: 'critical-receiver'

@@ -13,7 +13,7 @@ QuckApp provides a complete OpenAPI 3.0 specification for all REST API endpoints
 When running the backend, Swagger UI is available at:
 
 ```
-http://localhost:3000/api/docs
+http://localhost:3000/api/v1/docs
 ```
 
 Features:
@@ -66,7 +66,7 @@ openapi-generator-cli generate \
 
 | Environment | Base URL |
 |-------------|----------|
-| Development | `http://localhost:3000/api/v1` |
+| Development | `http://localhost:3000/api/v1/v1` |
 | Production | `https://api.quckapp.com/api/v1` |
 
 ### Authentication

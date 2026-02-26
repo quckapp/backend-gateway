@@ -150,7 +150,7 @@ export class SpringAuthClientService {
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
   ) {
-    this.baseUrl = this.configService.get('SPRING_AUTH_SERVICE_URL') || 'http://localhost:8081/api/auth';
+    this.baseUrl = this.configService.get('SPRING_AUTH_SERVICE_URL') || 'http://localhost:8081/api/v1/auth';
     this.apiKey = this.configService.get('SPRING_AUTH_API_KEY') || '';
     this.timeout = parseInt(this.configService.get('SPRING_AUTH_TIMEOUT') || '10000', 10);
   }

@@ -47,7 +47,7 @@ QuckApp uses a dedicated **Spring Boot authentication microservice** for enterpr
 ### Base URL
 
 ```
-/api/auth/v1
+/api/v1/auth
 ```
 
 ### Registration & Authentication
@@ -372,7 +372,7 @@ RUN addgroup -g 1001 appgroup && \
     adduser -u 1001 -G appgroup -D appuser
 USER appuser
 EXPOSE 8081
-HEALTHCHECK --interval=30s CMD wget -qO- http://localhost:8081/api/auth/actuator/health
+HEALTHCHECK --interval=30s CMD wget -qO- http://localhost:8081/api/v3/auth/actuator/health
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
@@ -424,7 +424,7 @@ The auth-service communicates with the NestJS backend via:
 ```typescript
 // NestJS calling auth-service
 const response = await axios.post(
-  'http://auth-service:8081/api/auth/v1/token/validate',
+  'http://auth-service:8081/api/v1/auth/token/validate',
   { token },
   { headers: { 'X-API-Key': process.env.AUTH_SERVICE_API_KEY } }
 );
@@ -435,13 +435,13 @@ const response = await axios.post(
 Swagger UI available at:
 
 ```
-http://localhost:8081/api/auth/swagger-ui.html
+http://localhost:8081/api/v3/auth/swagger-ui.html
 ```
 
 OpenAPI spec at:
 
 ```
-http://localhost:8081/api/auth/v3/api-docs
+http://localhost:8081/api/v3/auth/api-docs
 ```
 
 ## Monitoring
@@ -449,10 +449,10 @@ http://localhost:8081/api/auth/v3/api-docs
 ### Actuator Endpoints
 
 ```
-GET /api/auth/actuator/health
-GET /api/auth/actuator/info
-GET /api/auth/actuator/metrics
-GET /api/auth/actuator/prometheus
+GET /api/v3/auth/actuator/health
+GET /api/v3/auth/actuator/info
+GET /api/v3/auth/actuator/metrics
+GET /api/v3/auth/actuator/prometheus
 ```
 
 ### Key Metrics

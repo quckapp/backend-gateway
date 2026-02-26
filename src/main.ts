@@ -185,7 +185,7 @@ Real-time features use Socket.IO. Connect to the server and listen for events li
 
   logger.log(`Application is running on: http://0.0.0.0:${port}`);
   logger.log(`Environment: ${configService.get('NODE_ENV')}`);
-  logger.log(`API Documentation: http://localhost:${port}/api/docs`);
+  logger.log(`API Documentation: http://localhost:${port}/api/v1/docs`);
   logger.log(`CORS Origins: ${allowedOrigins}`);
   logger.log(`Security: Helmet ${isDevelopment ? '(dev mode)' : '(production mode)'}`);
 }

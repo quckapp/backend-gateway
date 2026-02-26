@@ -76,7 +76,7 @@ OTEL_SERVICE_NAME=quckapp-backend
 ### Usage
 
 ```typescript
-import { trace } from '@opentelemetry/api';
+import { trace } from '@opentelemetry/api/v1';
 
 const tracer = trace.getTracer('quckapp');
 

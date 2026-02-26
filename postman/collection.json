@@ -3,7 +3,7 @@
     "_postman_id": "quckapp-api-collection",
     "name": "QuckApp API",
     "description": "API Integration Tests for QuckApp Backend",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v1.1.0/collection.json"
   },
   "item": [
     {

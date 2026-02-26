@@ -36,11 +36,11 @@ The server will be running at `http://localhost:3000`
 ## Verify Installation
 
 ### API Documentation
-Open [http://localhost:3000/api/docs](http://localhost:3000/api/docs) for Swagger UI
+Open [http://localhost:3000/api/v1/docs](http://localhost:3000/api/v1/docs) for Swagger UI
 
 ### Health Check
 ```bash
-curl http://localhost:3000/api/v1/health
+curl http://localhost:3000/api/v1/v1/health
 ```
 
 Expected response:

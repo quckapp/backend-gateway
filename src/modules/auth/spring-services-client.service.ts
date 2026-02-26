@@ -205,7 +205,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<UserResponse>>(
       this.userServiceUrl,
       'GET',
-      `/api/users/${userId}`,
+      `/api/v1/users/${userId}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -215,7 +215,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<UserResponse>>(
       this.userServiceUrl,
       'GET',
-      `/api/users/external/${externalId}`,
+      `/api/v1/users/external/${externalId}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -225,7 +225,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<UserResponse>>(
       this.userServiceUrl,
       'POST',
-      '/api/users',
+      '/api/v1/users',
       request,
       accessToken,
     ).then(r => r.data);
@@ -235,7 +235,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<UserResponse>>(
       this.userServiceUrl,
       'PUT',
-      `/api/users/${userId}`,
+      `/api/v1/users/${userId}`,
       request,
       accessToken,
     ).then(r => r.data);
@@ -245,7 +245,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<PagedResponse<UserResponse>>>(
       this.userServiceUrl,
       'GET',
-      `/api/users/search?query=${encodeURIComponent(query)}&page=${page}&size=${size}`,
+      `/api/v1/users/search?query=${encodeURIComponent(query)}&page=${page}&size=${size}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -259,7 +259,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<PermissionCheckResponse>>(
       this.permissionServiceUrl,
       'POST',
-      '/api/permissions/check',
+      '/api/v1/permissions/check',
       request,
       accessToken,
     ).then(r => r.data);
@@ -269,7 +269,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<UserPermissionsResponse>>(
       this.permissionServiceUrl,
       'GET',
-      `/api/user-roles/user/${userId}/workspace/${workspaceId}`,
+      `/api/v1/user-roles/user/${userId}/workspace/${workspaceId}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -279,7 +279,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<RoleResponse[]>>(
       this.permissionServiceUrl,
       'GET',
-      `/api/roles/workspace/${workspaceId}`,
+      `/api/v1/roles/workspace/${workspaceId}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -289,7 +289,7 @@ export class SpringServicesClientService {
     await this.makeRequest<ApiResponse<void>>(
       this.permissionServiceUrl,
       'POST',
-      '/api/user-roles',
+      '/api/v1/user-roles',
       { userId, roleId, workspaceId },
       accessToken,
     );
@@ -299,7 +299,7 @@ export class SpringServicesClientService {
     await this.makeRequest<ApiResponse<void>>(
       this.permissionServiceUrl,
       'DELETE',
-      `/api/user-roles/user/${userId}/role/${roleId}/workspace/${workspaceId}`,
+      `/api/v1/user-roles/user/${userId}/role/${roleId}/workspace/${workspaceId}`,
       null,
       accessToken,
     );
@@ -313,7 +313,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<AuditLogResponse>>(
       this.auditServiceUrl,
       'POST',
-      '/api/audit/logs',
+      '/api/v1/audit/logs',
       request,
       accessToken,
     ).then(r => r.data);
@@ -323,7 +323,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<PagedResponse<AuditLogResponse>>>(
       this.auditServiceUrl,
       'GET',
-      `/api/audit/logs/workspace/${workspaceId}?page=${page}&size=${size}`,
+      `/api/v1/audit/logs/workspace/${workspaceId}?page=${page}&size=${size}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -333,7 +333,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<PagedResponse<AuditLogResponse>>>(
       this.auditServiceUrl,
       'POST',
-      '/api/audit/logs/search',
+      '/api/v1/audit/logs/search',
       searchRequest,
       accessToken,
     ).then(r => r.data);
@@ -347,7 +347,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<SystemHealthResponse>>(
       this.adminServiceUrl,
       'GET',
-      '/api/admin/health/services',
+      '/api/v1/admin/health/services',
       null,
       accessToken,
     ).then(r => r.data);
@@ -357,7 +357,7 @@ export class SpringServicesClientService {
     return this.makeRequest<ApiResponse<FeatureFlagResponse>>(
       this.adminServiceUrl,
       'GET',
-      `/api/admin/features/${featureKey}`,
+      `/api/v1/admin/features/${featureKey}`,
       null,
       accessToken,
     ).then(r => r.data);
@@ -367,7 +367,7 @@ export class SpringServicesClientService {
     const response = await this.makeRequest<ApiResponse<{ enabled: boolean }>>(
       this.adminServiceUrl,
       'POST',
-      '/api/admin/features/check',
+      '/api/v1/admin/features/check',
       { featureKey, userId, workspaceId },
       accessToken,
     );
@@ -376,8 +376,8 @@ export class SpringServicesClientService {
 
   async getSystemSettings(category?: string, accessToken?: string): Promise<SystemSettingResponse[]> {
     const path = category
-      ? `/api/admin/settings/category/${category}`
-      : '/api/admin/settings';
+      ? `/api/v1/admin/settings/category/${category}`
+      : '/api/v1/admin/settings';
     return this.makeRequest<ApiResponse<SystemSettingResponse[]>>(
       this.adminServiceUrl,
       'GET',

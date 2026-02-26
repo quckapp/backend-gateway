@@ -417,7 +417,7 @@ function parseArgs(): MigrationConfig {
 
   const config: MigrationConfig = {
     mongoUri: process.env.MONGODB_URI || "mongodb://localhost:27017/quckapp",
-    springUrl: process.env.SPRING_AUTH_SERVICE_URL || "http://localhost:8081/api/auth",
+    springUrl: process.env.SPRING_AUTH_SERVICE_URL || "http://localhost:8081/api/v1/auth",
     apiKey: process.env.SPRING_AUTH_API_KEY || "",
     batchSize: 100,
     dryRun: false,

@@ -158,7 +158,7 @@ curl http://localhost:3000/api/v1/health
 ```
 
 ### API Documentation
-Open: http://localhost:3000/api/docs
+Open: http://localhost:3000/api/v1/docs
 
 ### Database Connection
 Check logs for:

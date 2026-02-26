@@ -198,7 +198,7 @@ export class OAuthService {
     return new Promise((resolve, reject) => {
       const options = {
         hostname: 'www.googleapis.com',
-        path: `/oauth2/v3/userinfo`,
+        path: `/oauth2/v1/userinfo`,
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,

@@ -272,23 +272,23 @@ GET /metrics             - Prometheus metrics
 ### Call Management
 
 ```
-POST /api/calls/:call_id/invite        - Invite to call
-GET  /api/calls/:call_id/participants  - Get participants
+POST /api/v1/calls/:call_id/invite        - Invite to call
+GET  /api/v1/calls/:call_id/participants  - Get participants
 ```
 
 ### Huddle Management
 
 ```
-POST /api/huddles                      - Create huddle
-GET  /api/huddles/:huddle_id           - Get details
-POST /api/huddles/:huddle_id/invite    - Invite users
+POST /api/v1/huddles                      - Create huddle
+GET  /api/v1/huddles/:huddle_id           - Get details
+POST /api/v1/huddles/:huddle_id/invite    - Invite users
 ```
 
 ### Presence
 
 ```
-GET /api/presence/:user_id     - Get user presence
-GET /api/presence/online       - List online users
+GET /api/v1/presence/:user_id     - Get user presence
+GET /api/v1/presence/online       - List online users
 ```
 
 ## Configuration

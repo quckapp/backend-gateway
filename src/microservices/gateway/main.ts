@@ -29,7 +29,7 @@ async function bootstrap() {
 
   const port = process.env.GATEWAY_PORT || PORTS.API_GATEWAY;
   await app.listen(port);
-  console.log(`🚀 API Gateway is running on http://localhost:${port}/api`);
+  console.log(`🚀 API Gateway is running on http://localhost:${port}/api/v1`);
 }
 
 bootstrap();

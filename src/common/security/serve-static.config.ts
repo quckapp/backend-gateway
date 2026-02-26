@@ -41,7 +41,7 @@ export function getServeStaticConfig(
   return {
     rootPath: rootPath,
     serveRoot: options?.serveRoot || '/',
-    exclude: options?.exclude || ['/api/(.*)', '/health', '/metrics', '/socket.io/(.*)'],
+    exclude: options?.exclude || ['/api/v1/(.*)', '/health', '/metrics', '/socket.io/(.*)'],
     serveStaticOptions: {
       // Don't serve index.html automatically (SPA routing handled separately)
       index: options?.serveStaticOptions?.index ?? false,
@@ -103,7 +103,7 @@ export function getUploadsConfig(uploadDir: string): ServeStaticModuleOptions {
   return {
     rootPath: join(process.cwd(), uploadDir),
     serveRoot: '/uploads',
-    exclude: ['/api/(.*)'],
+    exclude: ['/api/v1/(.*)'],
     serveStaticOptions: {
       index: false,
       maxAge: '7d',
@@ -138,7 +138,7 @@ export function getDocsConfig(docsPath: string): ServeStaticModuleOptions {
   return {
     rootPath: join(process.cwd(), docsPath),
     serveRoot: '/docs',
-    exclude: ['/api/(.*)'],
+    exclude: ['/api/v1/(.*)'],
     serveStaticOptions: {
       index: ['index.html'],
       maxAge: '1h',
@@ -163,7 +163,7 @@ export function getSpaConfig(
   return {
     rootPath: join(process.cwd(), buildPath),
     serveRoot: options?.serveRoot || '/',
-    exclude: ['/api/(.*)', '/socket.io/(.*)', '/health', '/metrics'],
+    exclude: ['/api/v1/(.*)', '/socket.io/(.*)', '/health', '/metrics'],
     serveStaticOptions: {
       index: options?.indexFile || 'index.html',
       maxAge: 0, // Don't cache index.html

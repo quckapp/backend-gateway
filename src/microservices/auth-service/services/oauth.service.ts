@@ -272,7 +272,7 @@ export class OAuthService {
   private async verifyGoogleToken(token: string): Promise<OAuthUserInfo> {
     try {
       const response = await axios.get<GoogleUserInfo>(
-        'https://www.googleapis.com/oauth2/v2/userinfo',
+        'https://www.googleapis.com/oauth2/v1/userinfo',
         {
           headers: { Authorization: `Bearer ${token}` },
         },

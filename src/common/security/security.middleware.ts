@@ -18,7 +18,7 @@ export class SecurityHeadersMiddleware implements NestMiddleware {
     const isDevelopment = this.configService.get('NODE_ENV') === 'development';
 
     // Prevent caching of sensitive data
-    if (req.path.includes('/auth/') || req.path.includes('/api/')) {
+    if (req.path.includes('/auth/') || req.path.includes('/api/v1/')) {
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
@@ -180,7 +180,7 @@ export class RequestLoggingMiddleware implements NestMiddleware {
  * parameters with the same name to exploit application logic.
  *
  * Example attack:
- * GET /api/users?admin=false&admin=true
+ * GET /api/v1/users?admin=false&admin=true
  * Without protection, the application might use the last value (true)
  *
  * With HPP middleware:

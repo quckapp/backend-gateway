@@ -17,7 +17,7 @@ export class UserProfileClientService {
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
   ) {
-    this.baseUrl = this.configService.get<string>('SPRING_AUTH_SERVICE_URL', 'http://localhost:8081/api/auth') + '/v1/users';
+    this.baseUrl = this.configService.get<string>('SPRING_AUTH_SERVICE_URL', 'http://localhost:8081/api/v1/auth') + '/v1/users';
     this.apiKey = this.configService.get<string>('SPRING_AUTH_API_KEY', '');
     this.timeout = this.configService.get<number>('SPRING_AUTH_TIMEOUT', 10000);
     this.enabled = this.configService.get<string>('USE_SPRING_PROFILES', 'false') === 'true';

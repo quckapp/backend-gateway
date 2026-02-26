@@ -263,7 +263,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 ## API Documentation
 
-Swagger UI available at `/api/docs`
+Swagger UI available at `/api/v1/docs`
 
 ```typescript
 const swaggerConfig = new DocumentBuilder()
